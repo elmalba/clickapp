@@ -1,0 +1,72 @@
+<script src="/Chart.js"></script>
+<canvas id="myChart" height="95%" ></canvas>
+<script src="/assets/action_cable.self-1641ec3e8ea24ed63601e86efcca7f9266e09f390e82199d56aa7e4bd50e1aa9.js?body=1" data-turbolinks-track="reload"></script>
+<script>
+
+  var ctx = document.getElementById("myChart");
+  var Xdata=[<%@question.answers.each do |q|%>0,<%end%>];
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [<%@question.answers.each do |q|%>'<%=q['Answer'].html_safe%>',<%end%>],
+      datasets: [{
+        label: '<%= @question.question_asked %>',
+        data:Xdata ,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+
+
+  (function() {
+    this.App || (this.App = {});
+
+    App.cable = ActionCable.createConsumer();
+
+  }).call(this);
+
+
+  App.answers = App.cable.subscriptions.create("AnswersChannel", {
+    connected: function() {
+      // Called when the subscription is ready for use on the server
+    },
+
+    disconnected: function() {
+      // Called when the subscription has been terminated by the server
+    },
+
+    received: function(data){
+      value=data.new_val.answer
+      Xdata[value]++
+      myChart.update()
+
+    }
+  });
+
+
+</script>

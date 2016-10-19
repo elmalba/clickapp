@@ -1,0 +1,70 @@
+
+                <div id="main-wrapper">
+                    <div class="row">
+                        <div class="col-md-3 center">
+                            <div class="login-box">
+                              <% flash.each do |key, value| %>
+                                  <div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button><%= value %></div>
+                              <% end %>
+                                <a href="index.html" class="logo-name text-lg text-center">Clickapp</a>
+                                <p class="text-center m-t-md">Crea una cuenta en Clickapp</p>
+                                <!--url: url_for(action:'create',controller:'registrations')-->
+                                <%= form_for (@user), class: "m-t-md" do |f|%>
+                                <%= render 'shared/error_messages' %>
+
+                                  <div class="form-group">
+                                    <%= f.label :rut, "Rut / VERIFICAR!" %><br />
+                                    <%= f.text_field :rut, autofocus: true, class: "form-control" %>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <%= f.label :name, "Nombre" %><br />
+                                    <%= f.text_field :name, autofocus: true, class: "form-control" %>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <%= f.label :lastname, "Apellido"%><br />
+                                    <%= f.text_field :lastname, autofocus: true, class: "form-control" %>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <%= f.label :institution, "Institución"%><br />
+                                    <%= f.text_field :institution, autofocus: true, class: "form-control" %>
+                                  </div>
+
+
+                                  <!--<div class="form-group">
+                                    <%-# f.collection_check_boxes(:institution, User.all, :id ) -%>
+                                  </div>-->
+
+                                  <div class="form-group">
+                                    <%= f.label :role, "Rol"%><br />
+                                    <%= f.select :role, options_for_select([["Estudiante", "student"], ["Docente", "teacher"]]), {}, {autofocus: 'true', class: 'form-control'} %>                                 </div>
+
+                                  <div class="form-group">
+                                    <%= f.label :email, "E-mail"%><br />
+                                    <%= f.email_field :email, autofocus: true, class: "form-control" %>
+                                  </div>
+
+
+
+                                  <div class="form-group">
+                                    <%= f.label :password, "Contraseña" %><br />
+                                    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <%= f.label :confpassword, "Confirmar contraseña" %><br />
+                                    <%= f.password_field :confpassword, autocomplete: "off", class: "form-control" %>
+                                  </div>
+
+                                    <br />
+                                    <%= f.submit "Regístrate", class: "btn btn-success btn-block" %>
+                                    <p class="text-center m-t-xs text-sm">¿Ya tienes una cuenta?</p>
+                                    <%= link_to "Entra", '/login', class: "btn btn-default btn-block m-t-xs" %>
+                               <%end%>
+                                <p class="text-center m-t-xs text-sm">2016 &copy; Clickapp</p>
+                            </div>
+                        </div>
+                    </div><!-- Row -->
+                </div><!-- Main Wrapper -->

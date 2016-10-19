@@ -1,0 +1,65 @@
+<div class="page-inner" ng-controller="usersadmin">
+  <div class="page-title">
+    <h3>Usuarios</h3>
+
+  </div>
+  <div id="main-wrapper">
+    <div class="row">
+
+    <!--users listed -->
+
+      <div class="col-lg-12 col-md-12">
+        <div class="panel panel-white">
+          <div class="panel-heading">
+            <h4 class="panel-title">Usuarios</h4>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive project-stats">
+              <label>Buscar: <input ng-model="searchText"></label>
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Rut</th>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Rol</th>
+                  <th>Acción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat = "user in users | filter:searchText">
+                  <th scope="row">{{$index+1}}</th>
+                  <td>{{user.rut}}</td>
+                  <td>{{user.name}}</td>
+                  <td>{{user.email}}</td>
+                  <td>{{user.role}}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        Acción <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Another action</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div><!-- Row -->
+  </div><!-- Main Wrapper -->
+  <div class="page-footer">
+    <p class="no-s">2016 &copy; Clickapp.</p>
+  </div>
+</div><!-- Page Inner -->

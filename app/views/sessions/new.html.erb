@@ -1,0 +1,38 @@
+
+                <div id="main-wrapper">
+                    <div class="row">
+                        <div class="col-md-3 center">
+                            <div class="login-box">
+                              <% flash.each do |key, value| %>
+                                  <div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button><%= value %></div>
+                              <% end %>
+
+
+
+                                <a href="index.html" class="logo-name text-lg text-center">Clickapp</a>
+                                <p class="text-center m-t-md">Ingresa a tu cuenta.</p>
+                                <!--url: url_for(action:'new',controller:'login')-->
+                                <%= form_for(:session, url: login_path) do |f| %>
+                                  <!--url: url_for(action:'new',controller:'login')-->
+                                  <div class="form-group">
+                                    <%= f.label :email, "E-mail"%><br />
+                                    <%= f.email_field :email, autofocus: true, class: "form-control" %>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <%= f.label :password, "Contraseña" %><br />
+                                    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+                                  </div>
+
+                                    <%= f.submit "Entra", class: "btn btn-success btn-block" %>
+                                    <p class="text-center m-t-xs text-sm">¿No tienes una cuenta?</p>
+                                    <%= link_to "¿Olvidaste tu contraseña?", 'forgot', class: "display-block text-center m-t-md text-sm" %>
+                                    <%= link_to "Regístrate", '/signup', class: "btn btn-default btn-block m-t-xs" %>
+
+                                <%end%>
+                                <p class="text-center m-t-xs text-sm">2016 &copy; Clickapp</p>
+                            </div>
+                        </div>
+                    </div><!-- Row -->
+                </div><!-- Main Wrapper -->
+           

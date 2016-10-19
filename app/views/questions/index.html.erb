@@ -1,0 +1,178 @@
+<script>updateTypeAnswers = function(){
+      if ($("#typeAnswer").val() == "multipleChoice") {
+        $("#multform").show();
+      } else {
+        $("#multform").hide();
+      }
+      if ($("#typeAnswer").val() == "trueFalse") {
+        $("#tfform").show();
+      } else {
+        $("#tfform").hide();
+      }
+      if ($("#typeAnswer").val() == "shortAnswer") {
+        $("#shortform").show();
+      } else {
+        $("#shortform").hide();
+      }
+    }
+    </script>
+
+<div class="page-inner" ng-controller="questions">
+  <div class="page-title">
+    <h3>Preguntas</h3>
+
+  </div>
+  <div id="main-wrapper">
+    <div class="row">
+
+
+          <div class="col-md-12" ng-controller="courses">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Añadir pregunta</h3>
+              </div>
+              <div class="panel-body">
+                <br>
+                <%= form_for :question,{'onsubmit':"return false;"} do |f| %>
+
+                    <div class="col-md-12 form-group required">
+                      <%= f.label :question_asked, "Pregunta"%><br />
+                      <%= f.text_field :question_asked, autofocus: true, class: "form-control" ,ng_model:"question.question_asked" %>
+                    </div>
+
+
+                    <div class="col-md-12 form-group ">
+                          <%= f.label :type_answer, "Tipo de pregunta"%><br />
+                          <select name="typeAnswer" id="typeAnswer" ng_model="question.type_answer" class="col-md-6 form-control">
+                            <option value="multipleChoice">Selección múltiple</option>
+                            <option value="trueFalse">Verdadero o falso</option>
+                            <option value="shortAnswer">Respuesta corta</option>
+                          </select>
+                    </div>
+
+                    <script>$(document).ready(updateTypeAnswers);
+                    $("#typeAnswer").change(updateTypeAnswers);</script>
+
+                    <!-- MALO ARREEGLAR -->
+                    <div style="display:none" id="multform" class="col-md-12 form-group">
+                      <%= f.label :A, "Alternativa 1"%><br />
+                      <%= f.text_field :A, autofocus: true, multiple: true, class: "form-control", ng_model:"question.answers[0]" %>
+
+                      <%= f.label :B, "Alternativa 2"%><br />
+                      <%= f.text_field :B, autofocus: true, multiple: true, class: "form-control", ng_model:"question.answers[1]" %>
+
+                      <%= f.label :C, "Alternativa 3"%><br />
+                      <%= f.text_field :C, autofocus: true, multiple: true, class: "form-control", ng_model:"question.answers[2]" %>
+
+                      <%= f.label :D, "Alternativa 4"%><br />
+                      <%= f.text_field :D, autofocus: true, multiple: true, class: "form-control", ng_model:"question.answers[3]" %>
+
+                      <%= f.label :correct_answer, "Número de la alternativa correcta"%><br />
+                      <%= f.number_field :correct_answer, autofocus: true, class: "form-control", ng_model:"question.correct_answer" %>
+                    </div>
+
+
+                    <div style="display:none" id="tfform" class="col-md-12 form-group">
+                      <%= f.label :correct_answer, "Selecciona la respuesta"%><br />
+                      <select name="tfAnswer" id="tfAnswer" ng_model="question.correct_answer" class="col-md-6 form-control">
+                        <option value="true">Verdadero</option>
+                        <option value="false">Falso</option>
+                      </select>
+                    </div>
+
+
+                    <div style="display:none" id="shortform" class="col-md-12 form-group">
+                    </div>
+
+
+                    <div class="col-md-12 form-group">
+                      <%= f.label :time, "Tiempo en segundos"%><br />
+                      <%= f.text_field :time, autofocus: true, class: "form-control" ,ng_model:"question.time" %>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <%= f.label :course, "Asignar a un curso"%><br />
+
+                      <select name="repeatSelect" id="repeatSelect" ng_model="question.courses" class="col-md-12 form-control">
+                        <% if @current_user.role == 'admin' %>
+                            <option ng-repeat="course in courses" value="{{course.id}}">{{course.name}} {{course.code}}</option>
+                        <% elsif @current_user.role == 'teacher' %>
+                            <option ng-repeat="course in courses | filter:{ teacher: '<%= @current_user.rut %>'}" value="{{course.id}}">{{course.name}} {{course.code}}</option>
+                        <% elsif @current_user.role == 'student' %>
+                            <option ng-repeat="course in courses | filter:{ assistant: '<%= @current_user.rut %>'}" value="{{course.id}}">{{course.name}} {{course.code}}</option>
+
+                      <% end %>
+
+                      </select>
+                    </div>
+
+                    <div class="col-md-4">
+                      <a class="btn btn-success" ng-click="Add_question()">Crear Pregunta</a>
+
+                    </div>
+                <%end%>
+              </div>
+            </div>
+          </div>
+
+      <!--courses listed -->
+
+      <div class="col-lg-12 col-md-12">
+        <div class="panel panel-white">
+          <div class="panel-heading">
+            <h4 class="panel-title">Cursos</h4>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive project-stats">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Pregunta</th>
+                  <th>Cursos</th>
+                  <th>Tipo Preg</th>
+                  <th>Creador</th>
+                  <th>Acción</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <% if @current_user.role == 'admin' %>
+                    <tr ng-repeat = "question in questions">
+                <% else %>
+                    <tr ng-repeat = "question in questions  | filter:{ user: '<%= @current_user.rut %>' }">
+                <% end %>
+                  <th scope="row">{{$index+1}}</th>
+                  <td>{{question.question_asked}}</td>
+                  <td>{{question.courses}}</td>
+                  <td>{{question.type_answer}}</td>
+                  <td>{{question.user}}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        Acción <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a ng-click="Delete_question($index)">Borrar</a></li>
+                        <li><%= link_to "Asignar a un curso", questions_path(:id => 'course.id') %></li>
+                        <li class="divider"></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div><!-- Row -->
+  </div><!-- Main Wrapper -->
+  <div class="page-footer">
+    <p class="no-s">2016 &copy; Clickapp.</p>
+  </div>
+</div><!-- Page Inner -->

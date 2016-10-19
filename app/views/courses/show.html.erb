@@ -1,0 +1,137 @@
+<!-- IF CURRENT USER IN STUDENT/ASSIST/TEACHER-->
+
+<div class="page-inner" ng-controller="courses">
+  <div class="page-title">
+    <h3><%= @course.name %> | <%= @course.code %></h3>
+  </div>
+  <div id="main-wrapper">
+    <div class="row">
+      <!-- Row -->
+
+
+      <div class="col-lg-12 col-md-12">
+        <div class="panel panel-white">
+          <div class="panel-heading">
+            <h4 class="panel-title">Vista alumno -> contestar pregunta si existe una por contestar</h4>
+          </div>
+          <div class="panel-body">
+
+          </div>
+        </div>
+      </div>
+
+      <% if @current_user.role != 'student'%>
+      <div class="col-lg-12 col-md-12">
+        <div class="panel panel-white">
+          <div class="panel-heading">
+            <h4 class="panel-title">Alumnos solicitando acceso al curso</h4>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive project-stats">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Rut</th>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Rol</th>
+                  <th>Acción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @course.users_request.each do |user| %>
+                <tr>
+                  <td><%= user.rut%></td>
+                  <td><%= user.name%></td>
+                  <td><%= user.email%></td>
+                  <td><%= user.role%></td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        Acción <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a ng-click="acceptRequest_course(course)">Aceptar solicitud</a></li>
+                        <li><a ng-click="deleteRequest_course(course)">Borrar solicitud</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+                  <% end %>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+
+
+      <div class="col-lg-12 col-md-12">
+        <div class="panel panel-white">
+          <div class="panel-heading">
+            <h4 class="panel-title">Alumnos en el curso</h4>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive project-stats">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Rut</th>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Rol</th>
+                  <th>Acción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @course.users_students.each do |user| %>
+                    <tr>
+                      <td><%= user.rut%></td>
+                      <td><%= user.name%></td>
+                      <td><%= user.email%></td>
+                      <td><%= user.role%></td>
+                      <td>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            Acción <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <% if @current_user.role == 'admin' || @current_user.role == 'teacher' %>
+                                <li><a ng-click="Delete_course($index)">Borrar</a></li>
+                            <% end %>
+
+                            <!-- help -->
+                            <li><%= link_to "Añadir Preguntas", questions_path(:id => 'course.id') %></li>
+                            <li class="divider"></li>
+
+                            <div>
+                              <li><a ng-click="joinRequest_course(course)">Solicitar acceso</a></li>
+                            </div>
+
+
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                <% end %>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+    </div>
+  </div><!-- Main Wrapper -->
+  <div class="page-footer">
+    <p class="no-s">2016 &copy; Clickapp.</p>
+  </div>
+</div><!-- Page Inner -->

@@ -1,0 +1,252 @@
+
+<div class="page-inner" ng-controller="courses">
+  <div class="page-title">
+    <h3>Cursos</h3>
+
+  </div>
+  <div id="main-wrapper">
+    <div class="row">
+
+
+      <% if @current_user.role == 'admin' || @current_user.role == 'teacher' %>
+
+          <div class="col-md-12">
+            <div class="panel panel-success">
+              <div class="panel-heading panel-collapse">
+                <h3 class="panel-title">Añadir curso</h3>
+                <div class="panel-control">
+                  <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Expandandir/Colapsar"><i class="icon-arrow-down"></i></a>
+                  <!--<a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Reload" class="panel-reload"><i class="icon-reload"></i></a>-->
+                </div>
+              </div>
+              <div class="panel-body collapse" ng-controller="usersadmin">
+                <br>
+                <%= form_for :course,{'onsubmit':"return false;"} do |f| %>
+
+                    <div class="col-md-12 form-group required">
+                      <%= f.label :name, "Nombre"%><br />
+                      <%= f.text_field :name, autofocus: true, class: "form-control" ,ng_model:"course.name" %>
+                    </div>
+
+                    <div class="col-md-8 form-group required">
+                      <%= f.label :code, "Código"%><br />
+                      <%= f.text_field :code, autofocus: true, class: "form-control" ,ng_model:"course.code" %>
+                    </div>
+
+                    <div class="col-md-4 form-group required">
+                      <%= f.label :section, "Sección" %><br />
+                      <%= f.text_field :section, autofocus: true, class: "form-control",ng_model:"course.section" %>
+                    </div>
+
+                    <% if @current_user.role == 'admin' %>
+                        <div class="col-md-12 form-group">
+                          <%= f.label :teacher, "Profesor"%><br />
+                        <select name="repeatSelect" id="repeatSelect" ng_model="course.teacher" class="col-md-12 form-control">
+                          <option ng-repeat="user in users | filter:{ role: 'teacher' }" value="{{user.rut}}">{{user.name}} {{user.lastname}} | {{user.email}} | {{user.rut}}</option>
+                        </select>
+                        </div>
+                    <% end %>
+
+                    <div class="form-group col-md-12">
+                      <%= f.label :teacher, "Ayudante"%><br />
+                      <select name="repeatSelect" id="repeatSelect" ng_model="course.assistant" class="col-md-12 form-control">
+                        <option ng-repeat="user in users | filter:{ role: 'student' }" value="{{user.rut}}">{{user.name}} {{user.lastname}} | {{user.email}} | {{user.rut}}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <a class="btn btn-success" ng-click="Add_course()">Crear</a>
+
+                    </div>
+                <%end%>
+              </div>
+            </div>
+          </div>
+
+
+      <% end %>
+
+      <!-- List my courses -->
+
+      <div class="col-lg-12 col-md-12">
+        <div class="panel panel-white">
+          <div class="panel-heading">
+            <h4 class="panel-title">Mis Cursos</h4>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive project-stats">
+              <label>Buscar: <input ng-model="searchTextMyCourses"></label>
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Curso</th>
+                  <th>Código-Sección</th>
+                  <th>Docente</th>
+                  <th>Ayudante</th>
+                  <th>Acción</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <!-- 3 REPETITIONS -->
+                <tr ng-repeat = "course in courses | filter: { teacher: '<%= @current_user.rut %>'}| filter: searchTextMyCourses">
+                  <th scope="row">{{$index+1}}</th>
+                  <td>{{course.name}}</td>
+                  <td>{{course.code}}-{{course.section}}</td>
+                  <td>{{course.teacher}}</td>
+                  <td>{{course.assistant}}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        Acción <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <% if @current_user.role == 'admin' || @current_user.role == 'teacher' %>
+                            <li><a ng-click="Delete_course($index)">Borrar</a></li>
+                        <% end %>
+
+                        <!-- help -->
+                        <li><%= link_to "Añadir Preguntas", questions_path(:id => 'course.id') %></li>
+                        <li class="divider"></li>
+                        <li><%= link_to "Ver Curso", URI::unescape(course_path(:id => '{{course.id}}')) %></li>
+
+
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr ng-repeat = "course in courses | filter: { assistant: '<%= @current_user.rut %>'} | filter: searchTextMyCourses">
+                  <th scope="row">{{$index+1}}</th>
+                  <td>{{course.name}}</td>
+                  <td>{{course.code}}-{{course.section}}</td>
+                  <td>{{course.teacher}}</td>
+                  <td>{{course.assistant}}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        Acción <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <% if @current_user.role == 'admin' || @current_user.role == 'teacher' %>
+                            <li><a ng-click="Delete_course($index)">Borrar</a></li>
+                        <% end %>
+
+                        <!-- help -->
+                        <li><%= link_to "Añadir Preguntas", questions_path(:id => 'course.id') %></li>
+                        <li class="divider"></li>
+                        <li><%= link_to "Ver Curso", URI::unescape(course_path(:id => '{{course.id}}')) %></li>
+
+
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr ng-repeat = "course in courses | filter: { students: '<%= @current_user.rut %>'} | filter: searchTextMyCourses">
+                  <th scope="row">{{$index+1}}</th>
+                  <td>{{course.name}}</td>
+                  <td>{{course.code}}-{{course.section}}</td>
+                  <td>{{course.teacher}}</td>
+                  <td>{{course.assistant}}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        Acción <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <% if @current_user.role == 'admin' || @current_user.role == 'teacher' %>
+                            <li><a ng-click="Delete_course($index)">Borrar</a></li>
+                        <% end %>
+
+                        <!-- help -->
+                        <li><%= link_to "Añadir Preguntas", URI::unescape(course_path(:id => '{{course.id}}')) %></li>
+                        <li class="divider"></li>
+                        <li><%= link_to "Ver Curso", URI::unescape(course_path(:id => '{{course.id}}')) %></li>
+
+
+
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+
+
+
+
+
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!--List all courses-->
+      <div class="col-lg-12 col-md-12">
+        <div class="panel panel-white">
+          <div class="panel-heading">
+            <h4 class="panel-title">Todos los Cursos</h4>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive project-stats">
+              <label>Buscar: <input ng-model="searchTextCourses"></label>
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Curso</th>
+                  <th>Código-Sección</th>
+                  <th>Docente</th>
+                  <th>Ayudante</th>
+                  <th>Acción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat = "course in courses | filter:searchTextCourses">
+                  <th scope="row">{{$index+1}}</th>
+                  <td>{{course.name}}</td>
+                  <td>{{course.code}}-{{course.section}}</td>
+                  <td>{{course.teacher}}</td>
+                  <td>{{course.assistant}}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        Acción <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <% if @current_user.role == 'admin' || @current_user.role == 'teacher' %>
+                        <li><a ng-click="Delete_course($index)">Borrar</a></li>
+                        <% end %>
+
+                        <!-- help -->
+                        <li><%= link_to "Añadir Preguntas", questions_path(:id => 'course.id') %></li>
+                        <li class="divider"></li>
+                        <li><a ng-click="joinRequest_course(course)">Solicitar acceso</a></li>
+                        <% if @current_user.role == 'admin' %>
+                        <li><%= link_to "Ver Curso", URI::unescape(course_path(:id => '{{course.id}}')) %></li>
+                        <% end %>
+
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div><!-- Row -->
+  </div><!-- Main Wrapper -->
+  <div class="page-footer">
+    <p class="no-s">2016 &copy; Clickapp.</p>
+  </div>
+</div><!-- Page Inner -->

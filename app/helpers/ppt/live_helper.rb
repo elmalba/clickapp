@@ -1,0 +1,2 @@
+module Ppt::LiveHelper
+end
