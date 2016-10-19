@@ -4,8 +4,6 @@
     <list default="true" id="fb237d3c-602f-4b6b-9d19-4e4a5947d252" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/ppt/live_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/ppt/live_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/ppt/live/show.html.erb" afterPath="$PROJECT_DIR$/app/views/ppt/live/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/test.rb" afterPath="$PROJECT_DIR$/config/environments/test.rb" />
     </list>
     <ignored path="Clickerapp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,8 +56,8 @@
       <file leaf-file-name="live_controller.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/ppt/live_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+            <state relative-caret-position="135">
+              <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -324,12 +322,12 @@
       <option name="presentableId" value="Default" />
       <updated>1476893364936</updated>
       <workItem from="1476893367729" duration="245000" />
-      <workItem from="1476897286232" duration="718000" />
+      <workItem from="1476897286232" duration="888000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="963000" />
+    <option name="totallyTimeSpent" value="1133000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -397,8 +395,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/ppt/live_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+        <state relative-caret-position="135">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
           <folding />
         </state>
       </provider>
