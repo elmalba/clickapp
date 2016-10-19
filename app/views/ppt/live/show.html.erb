@@ -8,7 +8,7 @@
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: [<%@question.answers.each do |q|%>'<%=q['Answer'].html_safe%>',<%end%>],
+      labels: [<%@question.answers.each_index do |q|%>'<%= (q+65).chr %> ',<%end%>],
       datasets: [{
         label: '<%= @question.question_asked %>',
         data:Xdata ,
@@ -61,6 +61,8 @@
     },
 
     received: function(data){
+
+      console.log(data)
       value=data.new_val.answer
       Xdata[value]++
       myChart.update()
@@ -70,3 +72,7 @@
 
 
 </script>
+
+<%@question.answers.each_index do |q|%>
+    <%= (q+65).chr %> : <%=@question.answers[q]['Answer'].html_safe%><br>
+    <%end%>
