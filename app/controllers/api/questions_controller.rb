@@ -62,8 +62,10 @@ class Api::QuestionsController <Api::ApiController
 
     p "aca"
     p params
+    question=Question.where(:status=>"Disponible").first()
     answer=Answer.new()
     answer.answer=params[:respuesta]
+    answer.question=question.id
     p "HOLA"
     answer.save()
 
