@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  skip_before_filter :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
 
 
   def index
@@ -11,6 +11,19 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+  end
+
+  def edit
+    @course = Course.find(params[:id])
+  end
+
+  def update
+    @course = Course.find(params[:id])
+    if @course.update_attributes(course_params)
+      render 'edit' #flash?
+    else
+      render 'edit'
+    end
   end
 
   def new
@@ -28,7 +41,7 @@ class CoursesController < ApplicationController
     course = Course.new(course_params)
     course.created_by = @current_user.name
     if @current_user.role == 'teacher'
-      course.teacher=@current_user.rut #RUT?
+      course.teacher=@current_user.id
     end
     if course.name.nil? || course.code.nil?
       render 'new' #ALERT SOMETHING
@@ -37,7 +50,6 @@ class CoursesController < ApplicationController
       render json:course
     end
   end
-
 
   private
 

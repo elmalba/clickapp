@@ -1,4 +1,4 @@
-<!-- IF CURRENT USER.RUT = @USER.ID -->
+<% if @current_user.id == @user.id%>
 <div class="page-inner">
   <div class="page-title">
     <h3><%= @user.name %></h3>
@@ -22,3 +22,8 @@
     <p class="no-s">2016 &copy; Clickapp.</p>
   </div>
 </div><!-- Page Inner -->
+<%else%>
+    <script type="text/javascript">
+    window.location.href="/home"
+    </script>
+<%end%>

@@ -1,0 +1,68 @@
+<% if @current_user.role == 'admin' %>
+
+    <div class="page-inner" ng-controller="courses">
+  <div class="page-title">
+    <h3><%= @course.name %></h3>
+
+  </div>
+  <div id="main-wrapper">
+    <div class="row">
+
+      <div class="col-md-12" ng-controller="courses">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Editar <%= @course.name %></h3>
+              </div>
+
+              <div class="panel-body" ng-controller="usersadmin">
+                <br>
+
+                    <%= form_for (@course)  do |f| %>
+
+                    <div class="col-md-12 form-group required">
+                      <%= f.label :name, "Nombre"%><br />
+                      <%= f.text_field :name, autofocus: true, class: "form-control" %>
+                    </div>
+
+                    <div class="col-md-8 form-group required">
+                      <%= f.label :code, "Código"%><br />
+                      <%= f.text_field :code, autofocus: true, class: "form-control" %>
+                    </div>
+
+                    <div class="col-md-4 form-group required">
+                      <%= f.label :section, "Sección" %><br />
+                      <%= f.text_field :section, autofocus: true, class: "form-control" %>
+                    </div>
+
+
+                    <div class="form-group col-md-12">
+
+                      <%= f.label :teacher, "Profesor"%><br />
+                      <%= f.collection_select :teacher, User.where(:role => 'teacher'), :id, :select_form, {:prompt=>true}, {:class=>'col-md-12 form-control'} %>
+
+                      <%= f.label :teacher, "Ayudante"%><br />
+                      <%= f.collection_select :assistant, User.where(:role => 'student'), :id, :select_form, {:prompt=>true}, {:class=>'col-md-12 form-control'}%>
+
+                    </div>
+
+                    <div class="col-md-4">
+                      <%= f.submit "Editar", class: "btn btn-success" %>
+                    </div>
+                <%end%>
+              </div>
+            </div>
+          </div>
+
+
+
+    </div><!-- Row -->
+  </div><!-- Main Wrapper -->
+  <div class="page-footer">
+    <p class="no-s">2016 &copy; Clickapp.</p>
+  </div>
+</div><!-- Page Inner -->
+<% else %>
+    <script type="text/javascript">
+      window.location.href="/home"
+    </script>
+<% end %>

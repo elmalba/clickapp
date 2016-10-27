@@ -1,0 +1,172 @@
+<% if @current_user.role == 'admin' or @course.students.include? @current_user.id or @course.teacher == @current_user.id or @course.assistant == @current_user.id %>
+
+
+<div class="page-inner" ng-controller="questions_edit">
+  <div class="page-title">
+    <h3><%= @question.question_asked %></h3>
+
+  </div>
+  <div id="main-wrapper">
+    <div class="row">
+
+      <div class="col-md-12" ng-controller="courses">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">Añadir pregunta</h3>
+          </div>
+
+          <div class="panel-body">
+            <br>
+            <%= form_for @question,{'onsubmit':"return false;"} do |f| %>
+
+                <div class="col-md-12 form-group required">
+                  <%= f.label :question_asked, "Pregunta"%><br />
+                  <%= f.text_field :question_asked, autofocus: true, class: "form-control" ,ng_model:"question.question_asked" %>
+                </div>
+
+
+                <div class="col-md-12 form-group ">
+
+                  <%= f.label :type_answer, "Tipo de pregunta"%>
+                  <input type="text" class="form-control" id="input-disabled" placeholder=
+                  <% if @question.type_answer == 'multipleChoice' %>
+                  "Selección multiple" disabled="">
+                  <% elsif @question.type_answer == 'trueFalse' %>
+                  "Verdadero o falso" disabled="">
+                  <% else %>
+                  "Respuesta corta" disabled="">
+                  <% end %>
+                </div>
+
+
+                <% if @question.type_answer == 'multipleChoice' %>
+
+                <div id="multform" class="col-md-12 form-group">
+
+                  <%= f.label :answers, "Alternativa 1"%>
+                  <%-# radio_button_tag(:correct_answer, '0', ng_model:"question.correct_answer") %>
+                  <%-# label_tag(:c_a, "Seleccionar como respuesta correcta") %>
+                  <%= f.text_field :answers, autofocus: true, class: "form-control", ng_model:"question.answers[0]" %><br />
+
+                  <%= f.label :answers, "Alternativa 2"%>
+                  <%= f.text_field :answers, autofocus: true, class: "form-control", ng_model:"question.answers[1]" %><br />
+
+                  <%= f.label :answers, "Alternativa 3"%>
+                  <%= f.text_field :answers, autofocus: true, class: "form-control", ng_model:"question.answers[2]" %><br />
+
+                  <%= f.label :answers, "Alternativa 4"%>
+                  <%= f.text_field :answers, autofocus: true, class: "form-control", ng_model:"question.answers[3]" %><br />
+
+                  <%= f.label "Selecciona la respuesta correcta"%><br />
+
+
+                    <% if @question.correct_answer == 0 %>
+                        <select name="mChoice" id="mChoice" ng_model="question.correct_answer" class="col-md-6 form-control">
+                        <option value="0" ng-selected="selected" >Alternativa 1</option>
+                        <option value="1">Alternativa 2</option>
+                        <option value="2">Alternativa 3</option>
+                        <option value="3">Alternativa 4</option>
+                        </select>
+
+                  <% elsif @question.correct_answer == 1 %>
+                        <select name="mChoice" id="mChoice" class="col-md-6 form-control">
+                        <option value="0">Alternativa 1</option>
+                        <option value="1" ng-selected="selected" >Alternativa 2</option>
+                        <option value="2">Alternativa 3</option>
+                        <option value="3">Alternativa 4</option>
+                        </select>
+
+                  <% elsif @question.correct_answer == 2 %>
+                        <select name="mChoice" id="mChoice" ng_model="question.correct_answer" class="col-md-6 form-control">
+                        <option value="0">Alternativa 1</option>
+                        <option value="1">Alternativa 2</option>
+                        <option value="2" ng-selected="selected">Alternativa 3</option>
+                        <option value="3">Alternativa 4</option>
+                        </select>
+
+                  <% else %>
+                        <select name="mChoice" id="mChoice" ng_model="question.correct_answer" class="col-md-6 form-control">
+                        <option value="0">Alternativa 1</option>
+                        <option value="1">Alternativa 2</option>
+                        <option value="2">Alternativa 3</option>
+                        <option value="3" ng-selected="selected">Alternativa 4</option>
+                        </select>
+
+                  <% end %>
+
+                </div>
+
+                <% elsif @question.type_answer == 'trueFalse' %>
+                <div id="tfform" class="col-md-12 form-group">
+                  <%= f.label "Selecciona la respuesta correcta"%><br />
+                  <select name="tfAnswer" id="tfAnswer" ng_model="question.correct_answer" class="col-md-6 form-control">
+                    <% if @question.correct_answer == 0 %>
+                        <option value="0" selected="selected">Alternativa 1</option>
+                        <option value="1">Alternativa 2</option>
+                    <% else %>
+                        <option value="0">Verdadero</option>
+                        <option value="1" selected="selected">Falso</option>
+                    <% end %>
+                  </select>
+                </div>
+                <% else %>
+
+
+                <div style="display:none" id="shortform" class="col-md-12 form-group">
+                </div>
+                <% end %>
+
+                <div class="col-md-12 form-group">
+                  <%= f.label :time, "Tiempo en segundos"%><br />
+                  <!--TIME_FIELD-->
+                  <%= f.number_field :time, min: '10', autofocus: true, class: "form-control" ,ng_model:"question.time" %>
+                </div>
+
+                <div class="col-md-12 form-group">
+                  <%= f.label :points, "¿Cuántos puntos vale la pregunta?"%><br />
+                  <!--TIME_FIELD-->
+                  <%= f.number_field :points, min: '0', autofocus: true, class: "form-control" ,ng_model:"question.points" %>
+                </div>
+
+
+                <div class="col-md-12 form-group">
+                  <%= f.label :subject, "Tema de la pregunta"%><br />
+                  <%= f.text_field :subject, autofocus: true, class: "form-control" ,ng_model:"question.subject" %>
+                </div>
+
+                <div class="form-group col-md-12">
+                  <%= f.label :courses, "Asignar a un curso"%><br />
+                  <label>Buscar: <input ng-model="searchTextMyCourses"></label>
+
+                  <select name="repeatSelect" id="repeatSelect" multiple="true" ng_model="question.courses" class="col-md-12 form-control">
+                    <% if @current_user.role == 'admin' %>
+                        <option ng-repeat="course in courses | filter: searchTextMyCourses" value="{{course.id}}">{{course.name}} {{course.code}}</option>
+                    <% elsif @current_user.role == 'teacher' %>
+                        <option ng-repeat="course in courses | filter:{ teacher: '<%= @current_user.rut %>'} | filter: searchTextMyCourses" value="{{course.id}}">{{course.name}} {{course.code}}</option>
+                    <% elsif @current_user.role == 'student' %>
+                        <option ng-repeat="course in courses | filter:{ assistant: '<%= @current_user.rut %>'} | filter: searchTextMyCourses" value="{{course.id}}">{{course.name}} {{course.code}}</option>
+                    <% end %>
+
+                  </select>
+                </div>
+
+                <div class="col-md-4">
+                  <a class="btn btn-success" ng-click="Update_question()">Editar Pregunta</a>
+                </div>
+            <%end%>
+          </div>
+        </div>
+      </div>
+
+
+    </div><!-- Row -->
+  </div><!-- Main Wrapper -->
+  <div class="page-footer">
+    <p class="no-s">2016 &copy; Clickapp.</p>
+  </div>
+</div><!-- Page Inner -->
+<% else %>
+    <script type="text/javascript">
+      window.location.href="/home"
+    </script>
+<% end %>

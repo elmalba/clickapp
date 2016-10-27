@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def index
     if @current_user.role == 'admin'
        if request.format.json?
-        return render json:User.all()
+        return render json:User.pluck(:id, :name, :lastname, :role, :rut, :email).all()
        end
     elsif @current_user.role == 'teacher'
       if request.format.json?
@@ -16,9 +16,11 @@ class UsersController < ApplicationController
     end
   end
 
+
   def show
     @user = User.find(params[:id])
   end
+
 
   def new
     @user = User.new

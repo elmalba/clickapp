@@ -12,7 +12,8 @@ app.controller("questions", function($scope,$resource) {
 
     $scope.question = new Questions();
     $scope.question.answers = ["","","",""]
-    $scope.Add_question= function () {0
+
+    $scope.Add_question= function () {
 
         question= $scope.question
 
@@ -24,7 +25,6 @@ app.controller("questions", function($scope,$resource) {
 
         })
 
-
     }
 
 
@@ -35,6 +35,5 @@ app.controller("questions", function($scope,$resource) {
 
         Questions.delete(question);
     }
-
 
 });

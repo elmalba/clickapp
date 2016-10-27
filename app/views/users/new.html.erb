@@ -33,10 +33,6 @@
                                   </div>
 
 
-                                  <!--<div class="form-group">
-                                    <%-# f.collection_check_boxes(:institution, User.all, :id ) -%>
-                                  </div>-->
-
                                   <div class="form-group">
                                     <%= f.label :role, "Rol"%><br />
                                     <%= f.select :role, options_for_select([["Estudiante", "student"], ["Docente", "teacher"]]), {}, {autofocus: 'true', class: 'form-control'} %>                                 </div>

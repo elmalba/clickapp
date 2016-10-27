@@ -14,3 +14,7 @@ class User
   field :last_login, :type => Array
   field :last_mobile, :type => Array
 end
+
+def select_form
+  "#{name} #{lastname} | #{email}"
+end

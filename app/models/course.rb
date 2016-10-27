@@ -21,5 +21,16 @@ class Course
     User.where(:id.in students)
   end
 
+  def users_teacher
+    User.where(:id => teacher)
+  end
+
+  def users_assistant
+    User.where(:id => assistant)
+  end
+
+  def select_form
+    "#{name} #{code} - #{section}"
+  end
 
 end

@@ -34,7 +34,7 @@
                 <span class="info-box-title">Cursos Creados</span>
               </div>
               <div class="info-box-icon">
-                <i class="icon-eye"></i>
+                <i class="icon-notebook"></i>
               </div>
               <!--<div class="info-box-progress">
                 <div class="progress progress-xs progress-squared bs-n">
@@ -53,7 +53,7 @@
                 <span class="info-box-title">Preguntas añadidas</span>
               </div>
               <div class="info-box-icon">
-                <i class="icon-eye"></i>
+                <i class="icon-question"></i>
               </div>
               <!--<div class="info-box-progress">
                 <div class="progress progress-xs progress-squared bs-n">
@@ -67,103 +67,112 @@
         <% end %>
 
 
-        <div class="col-lg-12 col-md-12">
+        <!-- List my courses -->
+
+        <div class="col-lg-12 col-md-12" ng-controller="courses">
           <div class="panel panel-white">
             <div class="panel-heading">
-              <h4 class="panel-title">Project Stats</h4>
+              <h4 class="panel-title">Mis Cursos</h4>
             </div>
             <div class="panel-body">
               <div class="table-responsive project-stats">
+                <label>Buscar: <input ng-model="searchTextMyCourses"></label>
                 <table class="table">
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>Project</th>
-                    <th>Status</th>
-                    <th>Manager</th>
-                    <th>Progress</th>
+                    <th>Curso</th>
+                    <th>Código-Sección</th>
+                    <th>Docente</th>
+                    <th>Ayudante</th>
+                    <th>Acción</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <th scope="row">452</th>
-                    <td>Mailbox Template</td>
-                    <td><span class="label label-info">Pending</span></td>
-                    <td>David Green</td>
+
+                  <!-- 3 REPETITIONS -->
+                  <tr ng-repeat = "course in courses | filter: { teacher: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
+                    <th scope="row">{{$index+1}}</th>
+                    <td>{{course.name}}</td>
+                    <td>{{course.code}}-{{course.section}}</td>
+                    <td>{{course.teacher}}</td>
+                    <td>{{course.assistant}}</td>
                     <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                          Action <span class="caret"></span>
+                          Acción <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Action</a></li>
-                          <li><a href="#">Another action</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">Separated link</a></li>
+                          <% if @current_user.role == 'admin' %>
+                              <li><a href="#" ng-click="Delete_course($index)">Borrar</a></li>
+                              <li><a href="#" ng-click="#">Editar</a></li>
+                              <li class="divider"></li>
+                          <% end %>
+
+                          <li><%= link_to "Ver Curso", URI::unescape(course_path(:id => '{{course.id}}')) %></li>
+
+
                         </ul>
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <th scope="row">327</th>
-                    <td>Wordpress Theme</td>
-                    <td><span class="label label-primary">In Progress</span></td>
-                    <td>Sandra Smith</td>
+
+                  <tr ng-repeat = "course in courses | filter: { assistant: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
+                    <th scope="row">{{$index+1}}</th>
+                    <td>{{course.name}}</td>
+                    <td>{{course.code}}-{{course.section}}</td>
+                    <td>{{course.teacher}}</td>
+                    <td>{{course.assistant}}</td>
                     <td>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                        </div>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                          Acción <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <% if @current_user.role == 'admin' %>
+                              <li><a href="#" ng-click="Delete_course($index)">Borrar</a></li>
+                              <li><a href="#" ng-click="#">Editar</a></li>
+                              <li class="divider"></li>
+                          <% end %>
+
+                          <li><%= link_to "Ver Curso", URI::unescape(course_path(:id => '{{course.id}}')) %></li>
+
+
+                        </ul>
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <th scope="row">226</th>
-                    <td>Modern Admin Template</td>
-                    <td><span class="label label-success">Finished</span></td>
-                    <td>Chritopher Palmer</td>
+                  <tr ng-repeat = "course in courses | filter: { students: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
+                    <th scope="row">{{$index+1}}</th>
+                    <td>{{course.name}}</td>
+                    <td>{{course.code}}-{{course.section}}</td>
+                    <td>{{course.teacher}}</td>
+                    <td>{{course.assistant}}</td>
                     <td>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        </div>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                          Acción <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <% if @current_user.role == 'admin' %>
+                              <li><a href="#" ng-click="Delete_course($index)">Borrar</a></li>
+                              <li><a href="#" ng-click="#">Editar</a></li>
+                              <li class="divider"></li>
+                          <% end %>
+                          <li><%= link_to "Ver Curso", URI::unescape(course_path(:id => '{{course.id}}')) %></li>
+
+
+
+                        </ul>
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <th scope="row">178</th>
-                    <td>eCommerce template</td>
-                    <td><span class="label label-danger">Canceled</span></td>
-                    <td>Amily Lee</td>
-                    <td>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">157</th>
-                    <td>Website PSD</td>
-                    <td><span class="label label-info">Testing</span></td>
-                    <td>Nick Doe</td>
-                    <td>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">157</th>
-                    <td>Fronted Theme</td>
-                    <td><span class="label label-warning">Waiting</span></td>
-                    <td>David Green</td>
-                    <td>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+
+
+
+
+
+
                   </tbody>
                 </table>
               </div>

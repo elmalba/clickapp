@@ -1,17 +1,38 @@
 class QuestionsController < ApplicationController
-  skip_before_filter :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
 
   def show
-
+    #return render json:Question.find(params[:id])
   end
 
   def index
-
     if request.format.json?
+      return render json:Question.pluck(:id, :question_asked, :time, :user, :answers, :type_answer, :courses, :points, :subject).all()
+    end
+  end
 
-      return render json:Question.all()
+  def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+    question = Question.new(question_params)
+    if params[:type_answer] == 'shortAnswer'
+      question.correct_answer = nil
+      question.answers = []
+    end
+    if params[:type_answer] == 'trueFalse'
+      question.answers = ["true", "false"]
     end
 
+    question.user = @current_user.id
+    question.save!
+    render json:question
+  end
+
+  def destroy
+    question= Question.find(params[:id])
+    render json:{:status => question.destroy}
   end
 
 
@@ -20,36 +41,29 @@ class QuestionsController < ApplicationController
   end
 
   def create
-
-    p params
     question = Question.new(question_params)
-    question.answers=params[:answers]
-    question.user = @current_user.rut
     if params[:type_answer] == 'shortAnswer'
-      question.correct_answer=nil
+       question.correct_answer = nil
+       #question.answers = [] PROBAR
     end
-    if params[:type_answer] == 'multipleChoice'
-      question.correct_answer=question.correct_answer-1
+    if params[:type_answer] == 'trueFalse'
+       question.answers = ["true", "false"]
     end
+
+    question.user = @current_user.id
+    #me agrega todos los cursos seleccionados :S
+    #question.courses.push(params[:courses])
     question.save
     render json:question
+
   end
-
-  def destroy
-    question= Question.find(params[:id])
-
-    render json:{:status => question.destroy}
-  end
-
-
 
 
   private
 
   def question_params
-    params.require(:question).permit(:question_asked, :type_answer, :correct_answer, :time).to_h
-    #AGREGAR NAME
-    #AGREGAR INSTITUTION
+    params.require(:question).permit!.to_h
+
   end
 
 
