@@ -3,8 +3,9 @@ class AnswersChannel < ApplicationCable::Channel
   include NoBrainer::Streams
 
   def subscribed
+    question=Question.where(:status=>"Disponible").first()
 
-    stream_from Answer.all, include_initial: true
+    stream_from Answer.where(:question=>question.id).all, include_initial: true
   end
 
   def unsubscribed
