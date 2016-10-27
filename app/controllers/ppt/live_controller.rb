@@ -13,6 +13,7 @@ class Ppt::LiveController < ActionController::Base
   def index
     answer=Answer.new()
     question=Question.where(:status=>"Disponible").first()
+    p question
     answer.question=question.id
     answer.answer=params[:ans]
     answer.save()
