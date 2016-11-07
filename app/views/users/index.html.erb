@@ -40,9 +40,11 @@
                         Acción <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Editar</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Borrar</a></li>
+                        <% if @current_user.role == 'admin' %>
+                            <li><%= link_to "Editar", URI::unescape(edit_user_path(:id => '{{user.id}}')) %></li>
+                            <li class="divider"></li>
+                            <li><a ng-click="Delete_user($index)">Borrar//No funciona</a></li>
+                      <% end %>
                       </ul>
                     </div>
                   </td>

@@ -82,7 +82,8 @@
                   <tr>
                     <th>#</th>
                     <th>Curso</th>
-                    <th>Código-Sección</th>
+                    <th>Código</th>
+                    <th>Sección</th>
                     <th>Docente</th>
                     <th>Ayudante</th>
                     <th>Acción</th>
@@ -94,7 +95,8 @@
                   <tr ng-repeat = "course in courses | filter: { teacher: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
                     <th scope="row">{{$index+1}}</th>
                     <td>{{course.name}}</td>
-                    <td>{{course.code}}-{{course.section}}</td>
+                    <td>{{course.code}}</td>
+                    <td>{{course.section}}</td>
                     <td>{{course.teacher}}</td>
                     <td>{{course.assistant}}</td>
                     <td>
@@ -111,7 +113,6 @@
 
                           <li><%= link_to "Ver Curso", URI::unescape(course_path(:id => '{{course.id}}')) %></li>
 
-
                         </ul>
                       </div>
                     </td>
@@ -120,7 +121,8 @@
                   <tr ng-repeat = "course in courses | filter: { assistant: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
                     <th scope="row">{{$index+1}}</th>
                     <td>{{course.name}}</td>
-                    <td>{{course.code}}-{{course.section}}</td>
+                    <td>{{course.code}}</td>
+                    <td>{{course.section}}</td>
                     <td>{{course.teacher}}</td>
                     <td>{{course.assistant}}</td>
                     <td>
@@ -145,7 +147,8 @@
                   <tr ng-repeat = "course in courses | filter: { students: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
                     <th scope="row">{{$index+1}}</th>
                     <td>{{course.name}}</td>
-                    <td>{{course.code}}-{{course.section}}</td>
+                    <td>{{course.code}}</td>
+                    <td>{{course.section}}</td>
                     <td>{{course.teacher}}</td>
                     <td>{{course.assistant}}</td>
                     <td>
@@ -161,14 +164,10 @@
                           <% end %>
                           <li><%= link_to "Ver Curso", URI::unescape(course_path(:id => '{{course.id}}')) %></li>
 
-
-
                         </ul>
                       </div>
                     </td>
                   </tr>
-
-
 
 
 

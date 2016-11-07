@@ -8,5 +8,14 @@ app.controller("usersadmin", function($scope,$resource) {
     });
 
     $scope.users=Users.query();
+    $scope.user = new Users();
+
+    $scope.Delete_user = function (index) {
+
+        user=$scope.users[index];
+        $scope.users.splice(index,1);
+
+        Users.delete(user);
+    };
 
 });

@@ -4,12 +4,10 @@ app.controller("courses", function($scope,$resource) {
     Courses = $resource('/courses/:id', {id:'@id'},{
         query: {method:'get', isArray: true ,headers: { 'Accept': 'application/json' } }
 
-
     });
 
     Request = $resource('/request', null,{
         query: {method:'get', isArray: true ,headers: { 'Accept': 'application/json' } }
-
 
     });
 
@@ -27,8 +25,6 @@ app.controller("courses", function($scope,$resource) {
             $scope.courses.push(data);
             $scope.course = new Courses();
     })
-
-
 };
 
 
@@ -40,19 +36,8 @@ app.controller("courses", function($scope,$resource) {
         Courses.delete(course);
     };
 
-
-    $scope.joinRequest_course = function (course) {
-    Request.save(course)
+    $scope.joinRequest_course = function (course){
+      Request.save(course)
     };
-//Actualiza el curso course, busca el id del usuario user en "request", lo borra y lo agrega en "students"
-    $scope.acceptRequest_course = function (course, user) {
-        $scope.course.splice(user, 1);
-    };
-
-//Borra el id del usuario user del arreglo "request" en el curso course
-    $scope.deleteRequest_course = function (course, user) {
-        Request.save(course)
-    };
-
 
 });

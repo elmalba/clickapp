@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def show
-    #return render json:Question.find(params[:id])
+    return render json:Question.find(params[:id])
   end
 
   def index
@@ -43,16 +43,15 @@ class QuestionsController < ApplicationController
   def create
     question = Question.new(question_params)
     if params[:type_answer] == 'shortAnswer'
-       question.correct_answer = nil
-       #question.answers = [] PROBAR
+      question.correct_answer = nil
+      #question.answers = [] PROBAR
     end
     if params[:type_answer] == 'trueFalse'
-       question.answers = ["true", "false"]
+      question.answers = ["true", "false"]
     end
 
     question.user = @current_user.id
-    #me agrega todos los cursos seleccionados :S
-    #question.courses.push(params[:courses])
+    question.answers.delete("")
     question.save
     render json:question
 

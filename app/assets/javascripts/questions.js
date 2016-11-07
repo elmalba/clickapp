@@ -11,7 +11,7 @@ app.controller("questions", function($scope,$resource) {
     $scope.questions=Questions.query();
 
     $scope.question = new Questions();
-    $scope.question.answers = ["","","",""]
+    $scope.question.answers = ["","","","",""]
 
     $scope.Add_question= function () {
 

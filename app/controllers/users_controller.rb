@@ -9,7 +9,7 @@ class UsersController < ApplicationController
        end
     elsif @current_user.role == 'teacher'
       if request.format.json?
-        return render json:User.where(:role => 'student').all()
+        return render json:User.where(:role => 'student').pluck(:id, :name, :lastname, :role, :rut, :email).all()
       end
     else
       redirect_to root_path
@@ -21,9 +21,19 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
 
   def new
     @user = User.new
+  end
+
+  def destroy
+    user= User.find(params[:id])
+
+    render json:{:status => user.destroy}
   end
 
 
@@ -54,7 +64,16 @@ class UsersController < ApplicationController
     session[:user_id] = user.id
   end
 
-  def edit
+  def update
+    @user = User.find(params[:id])
+    @user.institution = []
+    @user.institution  << [params[:user][:institution]]
+
+    if @user.update_attributes(user_params)
+      render 'edit' #flash?
+    else
+      render 'edit'
+    end
   end
 
   private

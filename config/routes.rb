@@ -17,11 +17,15 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   get    '/logout',  to: 'sessions#destroy'
+  get    '/acceptRequest', to: 'courses#acceptRequest'
+  get    '/deleteRequest', to: 'courses#deleteRequest'
+  get     '/forgot',  to: 'forgot#index'
 
   resources :courses
   resources :users
   resources :questions
   resources :request
+  resources :forgot
 #resources :sessions
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

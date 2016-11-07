@@ -1,4 +1,4 @@
-<% if @current_user.role == 'admin' %>
+<% if @current_user.role == 'admin' or @current_user.id == @course.teacher %>
 
     <div class="page-inner" ng-controller="courses">
   <div class="page-title">

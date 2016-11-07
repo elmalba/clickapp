@@ -1,5 +1,5 @@
-<% if @current_user.id == @user.id%>
-<div class="page-inner">
+<% if @current_user.id == @user.id or @current_user.role == 'admin'%>
+<div class="page-inner" ng-controller="courses">
   <div class="page-title">
     <h3><%= @user.name %></h3>
   </div>
@@ -9,19 +9,136 @@
       <div class="col-lg-12 col-md-12">
         <div class="panel panel-white">
           <div class="panel-heading">
-            <h4 class="panel-title">Cambiar Contraseña</h4>
+            <h4 class="panel-title"><%= @user.name %> <%= @user.lastname %></h4>
           </div>
           <div class="panel-body">
-
+            <p>Rol: <% if @user.role == 'admin'%> Admin <% elsif @user.role == 'teacher' %> Docente <% else %> Alumno <% end %></p>
+            <p>Rut: <%= @user.rut %></p>
+            <p>Email: <%= @user.email %></p>
+            <%= button_to "Cambiar contraseña", edit_user_path, :method => :get, class: "btn btn-success" %>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+
+
+
+            <!-- List my courses -->
+
+            <div class="col-lg-12 col-md-12">
+              <div class="panel panel-white">
+                <div class="panel-heading">
+                  <h4 class="panel-title">Mis Cursos</h4>
+                </div>
+                <div class="panel-body">
+                  <div class="table-responsive project-stats">
+                    <label>Buscar: <input ng-model="searchTextMyCourses"></label>
+                    <table class="table">
+                      <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Curso</th>
+                        <th>Código-Sección</th>
+                        <th>Docente</th>
+                        <th>Ayudante</th>
+                        <th>Acción</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+
+                      <!-- 3 REPETITIONS -->
+                      <tr ng-repeat = "course in courses | filter: { teacher: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
+                        <th scope="row">{{$index+1}}</th>
+                        <td>{{course.name}}</td>
+                        <td>{{course.code}}-{{course.section}}</td>
+                        <td>{{course.teacher}}</td>
+                        <td>{{course.assistant}}</td>
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                              Acción <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                              <% if @current_user.role == 'admin' %>
+                                  <li><a href="#" ng-click="Delete_course($index)">Borrar</a></li>
+                                  <li><%= link_to "Editar", URI::unescape(edit_course_path(:id => '{{course.id}}')) %></li>
+                                  <li class="divider"></li>
+                              <% end %>
+
+                              <li><%= link_to "Ver Curso", URI::unescape(course_path(:id => '{{course.id}}')) %></li>
+
+
+                            </ul>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr ng-repeat = "course in courses | filter: { assistant: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
+                        <th scope="row">{{$index+1}}</th>
+                        <td>{{course.name}}</td>
+                        <td>{{course.code}}-{{course.section}}</td>
+                        <td>{{course.teacher}}</td>
+                        <td>{{course.assistant}}</td>
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                              Acción <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                              <% if @current_user.role == 'admin' %>
+                                  <li><a href="#" ng-click="Delete_course($index)">Borrar</a></li>
+                                  <li><%= link_to "Editar", URI::unescape(edit_course_path(:id => '{{course.id}}')) %></li>
+                                  <li class="divider"></li>
+                              <% end %>
+
+                              <li><%= link_to "Ver Curso", URI::unescape(course_path(:id => '{{course.id}}')) %></li>
+
+
+                            </ul>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr ng-repeat = "course in courses | filter: { students: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
+                        <th scope="row">{{$index+1}}</th>
+                        <td>{{course.name}}</td>
+                        <td>{{course.code}}-{{course.section}}</td>
+                        <td>{{course.teacher}}</td>
+                        <td>{{course.assistant}}</td>
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                              Acción <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                              <% if @current_user.role == 'admin' %>
+                                  <li><a href="#" ng-click="Delete_course($index)">Borrar</a></li>
+                                  <li><%= link_to "Editar", URI::unescape(edit_course_path(:id => '{{course.id}}')) %></li>
+                                  <li class="divider"></li>
+                              <% end %>
+                              <li><%= link_to "Ver Curso", URI::unescape(course_path(:id => '{{course.id}}')) %></li>
+
+                            </ul>
+                          </div>
+                        </td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+    </div><!-- Row -->
   </div><!-- Main Wrapper -->
   <div class="page-footer">
     <p class="no-s">2016 &copy; Clickapp.</p>
   </div>
 </div><!-- Page Inner -->
+
+
+
+
 <%else%>
     <script type="text/javascript">
     window.location.href="/home"

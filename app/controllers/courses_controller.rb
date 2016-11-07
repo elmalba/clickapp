@@ -36,6 +36,21 @@ class CoursesController < ApplicationController
     render json:{:status => course.destroy}
   end
 
+  def acceptRequest
+    @course = Course.find(params[:id])
+    @course.students.push(params[:user])
+    @course.request.delete(params[:user])
+    @course.save
+    render 'show'
+  end
+
+  def deleteRequest
+    @course = Course.find(params[:id])
+    @course.request.delete(params[:user])
+    @course.save
+    render 'show'
+  end
+
 
   def create
     course = Course.new(course_params)
