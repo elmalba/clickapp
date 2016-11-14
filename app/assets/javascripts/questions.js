@@ -7,6 +7,8 @@ app.controller("questions", function($scope,$resource) {
 
     });
 
+    New_Window=null;
+
 
     $scope.questions=Questions.query();
 
@@ -33,6 +35,19 @@ app.controller("questions", function($scope,$resource) {
         $scope.questions.splice(index,1);
 
         Questions.delete(question);
+    }
+
+    $scope.open_window = function (url) {
+
+        if(New_Window != null && New_Window.parent != null) {
+            New_Window.location = url
+        }
+        else {
+            New_Window= window.open()
+            New_Window.location = url
+
+        }
+
     }
 
 });
