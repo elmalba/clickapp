@@ -39,6 +39,8 @@ app.controller("questions", function($scope,$resource) {
 
     $scope.open_window = function (url) {
 
+        console.log(url)
+
         if(New_Window != null && New_Window.parent != null) {
             New_Window.location = url
         }
