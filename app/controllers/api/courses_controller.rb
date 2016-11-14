@@ -1,7 +1,7 @@
 class Api::CoursesController < Api::ApiController
 
   def index
-    course=Course.find("3yXlwPmBf3Ucut")
+    course=Course.find("44oGwcH67QYaIU")
 
     objeto={"_id":course.id,
             "description":course.code,
