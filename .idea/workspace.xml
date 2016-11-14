@@ -4,6 +4,7 @@
     <list default="true" id="fb237d3c-602f-4b6b-9d19-4e4a5947d252" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/questions.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/questions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/questions/index.html.erb" afterPath="$PROJECT_DIR$/app/views/questions/index.html.erb" />
     </list>
     <ignored path="Clickerapp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -76,10 +77,10 @@
       <file leaf-file-name="index.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/questions/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="564">
-              <caret line="301" column="130" selection-start-line="301" selection-start-column="123" selection-end-line="301" selection-end-column="130" />
+            <state relative-caret-position="519">
+              <caret line="301" column="63" selection-start-line="301" selection-start-column="63" selection-end-line="301" selection-end-column="63" />
               <folding>
-                <marker date="1479131367000" expanded="true" signature="1468:11059" ph="do ... end" />
+                <marker date="1479131626000" expanded="true" signature="1468:11059" ph="do ... end" />
               </folding>
             </state>
           </provider>
@@ -118,8 +119,8 @@
       <file leaf-file-name="questions.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/javascripts/questions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+            <state relative-caret-position="497">
+              <caret line="48" column="47" selection-start-line="48" selection-start-column="47" selection-end-line="48" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -670,12 +671,12 @@
       <workItem from="1477494250702" duration="7960000" />
       <workItem from="1478557025394" duration="332000" />
       <workItem from="1479083914638" duration="1173000" />
-      <workItem from="1479131044791" duration="439000" />
+      <workItem from="1479131044791" duration="594000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11223000" />
+    <option name="totallyTimeSpent" value="11378000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -722,7 +723,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1479131367000" expanded="true" signature="1468:11059" ph="do ... end" />
+            <marker date="1479131626000" expanded="true" signature="1468:11059" ph="do ... end" />
           </folding>
         </state>
       </provider>
@@ -804,7 +805,7 @@
         <state relative-caret-position="15">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
-            <marker date="1479131367000" expanded="true" signature="1468:11059" ph="do ... end" />
+            <marker date="1479131626000" expanded="true" signature="1468:11059" ph="do ... end" />
           </folding>
         </state>
       </provider>
@@ -886,7 +887,7 @@
         <state relative-caret-position="15">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
-            <marker date="1479131367000" expanded="true" signature="1468:11059" ph="do ... end" />
+            <marker date="1479131626000" expanded="true" signature="1468:11059" ph="do ... end" />
           </folding>
         </state>
       </provider>
@@ -1107,18 +1108,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/questions/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="301" column="130" selection-start-line="301" selection-start-column="123" selection-end-line="301" selection-end-column="130" />
+        <state relative-caret-position="519">
+          <caret line="301" column="63" selection-start-line="301" selection-start-column="63" selection-end-line="301" selection-end-column="63" />
           <folding>
-            <marker date="1479131367000" expanded="true" signature="1468:11059" ph="do ... end" />
+            <marker date="1479131626000" expanded="true" signature="1468:11059" ph="do ... end" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/questions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+        <state relative-caret-position="497">
+          <caret line="48" column="47" selection-start-line="48" selection-start-column="47" selection-end-line="48" selection-end-column="47" />
           <folding />
         </state>
       </provider>

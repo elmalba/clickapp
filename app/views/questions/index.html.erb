@@ -299,7 +299,7 @@
                     <ul class="dropdown-menu" role="menu">
                       <li><a ng-click="Delete_question($index)">Borrar</a></li>
                       <li><%= link_to "Editar", URI::unescape(edit_question_path(:id => '{{question.id}}')) %></li>
-                      <li><a ng-click= "open_window('<%= URI::unescape(ppt_live_path(:id => '{{question.id}}')) %>')" >Ver Gráfico </a>  </li>
+                      <li><a ng-click= "open_window(question.id)" >Ver Gráfico </a>  </li>
                     </ul>
                   </div>
                 </td>

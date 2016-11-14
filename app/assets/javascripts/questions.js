@@ -42,11 +42,11 @@ app.controller("questions", function($scope,$resource) {
         console.log(url)
 
         if(New_Window != null && New_Window.parent != null) {
-            New_Window.location = url
+            New_Window.location = '/ppt/live/'+url
         }
         else {
             New_Window= window.open()
-            New_Window.location = url
+            New_Window.location = '/ppt/live/'+url
 
         }
 
