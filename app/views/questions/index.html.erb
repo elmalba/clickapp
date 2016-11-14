@@ -243,8 +243,6 @@
                   </select>
                 </div>
 
-
-
                 <div class="col-md-4">
                   <a class="btn btn-success" ng-click="Add_question()">Crear Pregunta</a>
                 </div>
@@ -258,7 +256,11 @@
       <div class="col-lg-12 col-md-12">
         <div class="panel panel-white">
           <div class="panel-heading">
-            <h4 class="panel-title">Preguntas</h4>
+            <% if @current_user.role != 'admin'%>
+                <h4 class="panel-title">Mis Preguntas</h4>
+            <% else %>
+                <h4 class="panel-title">Todas las Preguntas</h4>
+            <% end %>
           </div>
 
           <div class="panel-body">
@@ -288,7 +290,7 @@
                 <td>{{question.subject}}</td>
                 <td>{{question.courses}}</td>
                 <td>{{question.type_answer}}</td>
-                <td>{{question.user}}</td>
+                <td>{{question.user}}</td><!-- MOSTRAR NOMBRE DE USUARIO-->
                 <td>
                   <div class="btn-group">
                     <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

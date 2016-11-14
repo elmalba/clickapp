@@ -122,8 +122,9 @@
                           <ul class="dropdown-menu" role="menu">
                             <% if @current_user.role == 'admin' || @current_user.role == 'teacher' %>
                                 <li><a>Ver estadísticas</a></li>
-                                <li><a>Borrar alumno del curso</a></li>
-                            <% end %>
+                                <li><%= link_to "Borrar alumno", {:controller => "courses", :action => "deleteStudent", :id => @course.id, :user => user.id }%></li>
+
+                          <% end %>
                             <li><a>Enviar correo</a></li>
 
 

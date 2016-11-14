@@ -15,8 +15,12 @@
             <p>Rol: <% if @user.role == 'admin'%> Admin <% elsif @user.role == 'teacher' %> Docente <% else %> Alumno <% end %></p>
             <p>Rut: <%= @user.rut %></p>
             <p>Email: <%= @user.email %></p>
-            <%= button_to "Cambiar contraseña", edit_user_path, :method => :get, class: "btn btn-success" %>
-            </div>
+            <%= button_to "Editar Información", edit_user_path, :method => :get, class: "btn btn-success" %> <br>
+            <%= link_to "Cambiar Contraseña", {:controller => "users", :action => "changePassword", :id => @user.id }, class: "btn btn-success" %>
+
+
+
+          </div>
           </div>
         </div>
 

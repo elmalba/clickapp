@@ -25,6 +25,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def changePass
+    @user = User.find(params[:id])
+  end
+
 
   def new
     @user = User.new
@@ -39,20 +43,19 @@ class UsersController < ApplicationController
 
   def create
     if [params[:user][:password]] == [params[:user][:confpassword]]
-    @user = User.new(user_params)
-    @user.institution = []
-    @user.institution  << [params[:user][:institution]]
+        @user = User.new(user_params)
+        @user.institution = []
+        @user.institution  << [params[:user][:institution]]
 
-    if [params[:user][:role]] != 'student' || [params[:user][:role]] != 'teacher'
-      @user.role = 'student'
-    end
+        if [params[:user][:role]] != 'student' || [params[:user][:role]] != 'teacher'
+          @user.role = 'student'
+        end
 
-    if @user.save?
-        log_in @user
-        redirect_to root_path
-      else
-        render "new"
-      end
+        if @user.save?
+            log_in @user
+            redirect_to root_path
+        else render "new"
+        end
     else
       @user = User.new
       flash.now[:notice] = "Algo sucedió, inténtalo de nuevo."
@@ -66,14 +69,14 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.institution = []
-    @user.institution  << [params[:user][:institution]]
-
     if @user.update_attributes(user_params)
-      render 'edit' #flash?
-    else
-      render 'edit'
+      render 'show' #flash?
     end
+  end
+
+
+  def changePassword
+    @user = User.find(params[:id])
   end
 
   private

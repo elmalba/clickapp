@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get    '/logout',  to: 'sessions#destroy'
   get    '/acceptRequest', to: 'courses#acceptRequest'
   get    '/deleteRequest', to: 'courses#deleteRequest'
+  get    '/deleteStudent', to: 'courses#deleteStudent'
+  get    '/changePassword', to: 'users#changePassword'
   get     '/forgot',  to: 'forgot#index'
 
   resources :courses
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
   resources :questions
   resources :request
   resources :forgot
+  resources :quizzes
 #resources :sessions
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

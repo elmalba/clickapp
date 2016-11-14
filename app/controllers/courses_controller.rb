@@ -51,6 +51,13 @@ class CoursesController < ApplicationController
     render 'show'
   end
 
+  def deleteStudent
+    @course = Course.find(params[:id])
+    @course.students.delete(params[:user])
+    @course.save
+    render 'show'
+  end
+
 
   def create
     course = Course.new(course_params)

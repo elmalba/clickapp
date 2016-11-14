@@ -28,6 +28,7 @@ class QuestionsController < ApplicationController
     question.user = @current_user.id
     question.save!
     render json:question
+    redirect_to :new
   end
 
   def destroy
@@ -53,9 +54,10 @@ class QuestionsController < ApplicationController
     question.user = @current_user.id
     question.answers.delete("")
     question.save
-    render json:question
 
+    render json:question
   end
+
 
 
   private

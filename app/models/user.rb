@@ -13,6 +13,7 @@ class User
   field :history_quiz, :type => Array
   field :last_login, :type => Array
   field :last_mobile, :type => Array
+
 end
 
 def select_form

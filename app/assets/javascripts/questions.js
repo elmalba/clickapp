@@ -21,8 +21,7 @@ app.controller("questions", function($scope,$resource) {
 
             $scope.questions.push(data);
             $scope.question = new Questions();
-
-
+            $scope.question.answers = ["","","","",""]
         })
 
     }
