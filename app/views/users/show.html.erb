@@ -52,8 +52,9 @@
                       <!-- 3 REPETITIONS -->
                       <tr ng-repeat = "course in courses | filter: { teacher: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
                         <th scope="row">{{$index+1}}</th>
-                        <td>{{course.name}}</td>
-                        <td>{{course.code}}-{{course.section}}</td>
+                        <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
+                        <td>{{course.code}}</td>
+                        <td>{{course.section}}</td>
                         <td>{{course.teacher}}</td>
                         <td>{{course.assistant}}</td>
                         <td>
@@ -63,7 +64,7 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                               <% if @current_user.role == 'admin' %>
-                                  <li><a href="#" ng-click="Delete_course($index)">Borrar</a></li>
+                                  <li><a href="#" ng-click="Delete_course(course)">Borrar</a></li>
                                   <li><%= link_to "Editar", URI::unescape(edit_course_path(:id => '{{course.id}}')) %></li>
                                   <li class="divider"></li>
                               <% end %>
@@ -78,8 +79,9 @@
 
                       <tr ng-repeat = "course in courses | filter: { assistant: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
                         <th scope="row">{{$index+1}}</th>
-                        <td>{{course.name}}</td>
-                        <td>{{course.code}}-{{course.section}}</td>
+                        <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
+                        <td>{{course.code}}</td>
+                        <td>{{course.section}}</td>
                         <td>{{course.teacher}}</td>
                         <td>{{course.assistant}}</td>
                         <td>
@@ -89,7 +91,7 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                               <% if @current_user.role == 'admin' %>
-                                  <li><a href="#" ng-click="Delete_course($index)">Borrar</a></li>
+                                  <li><a href="#" ng-click="Delete_course(course)">Borrar</a></li>
                                   <li><%= link_to "Editar", URI::unescape(edit_course_path(:id => '{{course.id}}')) %></li>
                                   <li class="divider"></li>
                               <% end %>
@@ -104,8 +106,9 @@
 
                       <tr ng-repeat = "course in courses | filter: { students: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
                         <th scope="row">{{$index+1}}</th>
-                        <td>{{course.name}}</td>
-                        <td>{{course.code}}-{{course.section}}</td>
+                        <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
+                        <td>{{course.code}}</td>
+                        <td>{{course.section}}</td>
                         <td>{{course.teacher}}</td>
                         <td>{{course.assistant}}</td>
                         <td>
@@ -115,7 +118,7 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                               <% if @current_user.role == 'admin' %>
-                                  <li><a href="#" ng-click="Delete_course($index)">Borrar</a></li>
+                                  <li><a href="#" ng-click="Delete_course(course)">Borrar</a></li>
                                   <li><%= link_to "Editar", URI::unescape(edit_course_path(:id => '{{course.id}}')) %></li>
                                   <li class="divider"></li>
                               <% end %>

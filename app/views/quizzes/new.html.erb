@@ -1,0 +1,92 @@
+<% if @current_user.role == 'admin' or @current_user.role == 'teacher' %>
+<div class="page-inner" ng-controller="courses">
+  <div class="page-title">
+    <h3>Quizzes</h3>
+
+  </div>
+  <div id="main-wrapper">
+    <div class="row">
+
+
+      <div class="col-md-12">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">Añadir quiz</h3>
+          </div>
+
+          <div class="panel-body" ng-controller="quizzes">
+            <br>
+
+
+            <%= form_for :quiz,{'onsubmit':"return false;"} do |f| %>
+
+                <div class="col-md-12 form-group required">
+                  <%= f.label :name, "Nombre del quiz"%><br />
+                  <%= f.text_field :name, autofocus: true, class: "form-control" ,ng_model:"quiz.name" %>
+                </div>
+
+
+                <div class="col-md-4 form-group ">
+                  <%= f.label :type, "Tipo de quiz"%><br />
+                  <select name="typeAnswer" id="typeAnswer" ng_model="quiz.type" class="col-md-6 form-control">
+                    <option value="user">Usuario</option>
+                    <option value="annon">Anónimo</option>
+                  </select>
+                </div>
+
+                <div class="col-md-2 form-group">
+                  <%= f.label :time, "Tiempo en segundos"%><br />
+                  <!--TIME_FIELD-->
+                  <%= f.number_field :time, min: '60', autofocus: true, class: "form-control" ,ng_model:"quiz.time" %>
+                </div>
+
+                <div class="col-sm-10 form-group">
+
+                  <%= f.label "Selecciona el curso"%><br />
+
+                  <select id="selectCourse" class="col-md-12 form-control"ng-model="quiz.courses">
+                    <option ng-repeat = "course in courses | filter:{ courses: quiz.courses}" value="{{course.id}}">{{course.name}}</option>
+                  </select>
+
+                  <script type="text/javascript">
+                    $("#selectCourse").select2();
+                  </script>
+                </div>
+
+
+                <div class="form-group col-md-12" ng-controller="questions">
+                  <%= f.label :questions, "Asignar preguntas"%><br />
+
+                  <select id="selectQuestionsfromCourse" style="overflow-y: auto;" name="repeatQuestion" ng_model="quiz.questions" multiple="true" class="col-md-12 form-control">
+                     <option ng-repeat = "question in questions | filter:{ courses: quiz.courses} " value="{{question.id}}">{{question.question_asked}}</option>
+                  </select>
+
+                  <script type="text/javascript">
+                    $("#selectQuestionsfromCourse").select2();
+                  </script>
+
+                </div>
+
+                <div class="col-md-4">
+                  <a class="btn btn-success" ng-click="Add_quiz()">Crear Quizz</a>
+                </div>
+            <%end%>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+    </div><!-- Row -->
+  </div><!-- Main Wrapper -->
+  <div class="page-footer">
+    <p class="no-s">2016 &copy; Clickapp.</p>
+  </div>
+</div><!-- Page Inner -->
+<% else %>
+    <script type="text/javascript">
+      window.location.href="/home"
+    </script>
+<% end %>

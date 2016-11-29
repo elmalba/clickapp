@@ -36,10 +36,8 @@ class UsersController < ApplicationController
 
   def destroy
     user= User.find(params[:id])
-
     render json:{:status => user.destroy}
   end
-
 
   def create
     if [params[:user][:password]] == [params[:user][:confpassword]]

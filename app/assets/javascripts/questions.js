@@ -26,16 +26,28 @@ app.controller("questions", function($scope,$resource) {
             $scope.question.answers = ["","","","",""]
         })
 
+        window.location.reload();
+
     }
 
+    $scope.Delete_question = function(item) {
 
-    $scope.Delete_question = function (index) {
+        var index = $scope.questions.indexOf(item);
 
         question=$scope.questions[index];
         $scope.questions.splice(index,1);
 
         Questions.delete(question);
-    }
+    };
+
+
+    //$scope.Delete_question = function (index) {
+
+        //question=$scope.questions[index];
+        //$scope.questions.splice(index,1);
+        //console.log(question);
+        //Questions.delete(question);
+    //};
 
     $scope.open_window = function (url) {
 

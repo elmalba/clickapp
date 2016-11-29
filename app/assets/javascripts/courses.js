@@ -28,16 +28,25 @@ app.controller("courses", function($scope,$resource) {
 };
 
 
-    $scope.Delete_course = function (index) {
+    $scope.Delete_course = function(item) {
 
-    course=$scope.courses[index];
-    $scope.courses.splice(index,1);
+        var index = $scope.courses.indexOf(item);
+
+        course=$scope.courses[index];
+        $scope.courses.splice(index,1);
 
         Courses.delete(course);
     };
 
+
     $scope.joinRequest_course = function (course){
       Request.save(course)
+    };
+
+    $scope.open_window = function (url) {
+
+        window.open("/courses/"+url,"_self")
+
     };
 
 });

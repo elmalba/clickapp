@@ -5,7 +5,7 @@ class Course
   field :institution, :type => Array
   field :code, :type => String, :required => true
   field :name, :type => String, :required => true
-  field :section, :type => String
+  field :section, :type => String, :default => '01'
   field :teacher, :type => String
   field :assistant, :type => String
   field :created_by, :type => String

@@ -1,93 +1,92 @@
+<% if @current_user.role == 'admin' or @current_user.role == 'teacher' %>
+    <div class="page-inner" ng-controller="courses">
+      <div class="page-title">
+        <h3>Quizzes</h3>
 
-<div class="page-inner" ng-controller="questions" id="add_question">
-  <div class="page-title">
-    <h3>Quizzes</h3>
-
-  </div>
-  <div id="main-wrapper">
-    <div class="row">
-
-
-      <div class="col-md-12" ng-controller="courses">
-        <div class="panel panel-success">
-          <div class="panel-heading">
-            <h3 class="panel-title">Añadir quiz // NO FUNCIONAL</h3>
-          </div>
-
-          <div class="panel-body">
-            <br>
-            <%= form_for :quizzes,{'onsubmit':"return false;"} do |f| %>
-
-                <div class="col-md-12 form-group required">
-                  <%= f.label :name, "Nombre del quiz"%><br />
-                  <%= f.text_field :name, autofocus: true, class: "form-control" ,ng_model:"quiz.name" %>
-                </div>
-
-
-                <div class="col-md-4 form-group ">
-                  <%= f.label :type, "Tipo de quiz"%><br />
-                  <select name="typeAnswer" id="typeAnswer" ng_model="quiz.type" class="col-md-6 form-control">
-                    <option value="multipleChoice">Selección múltiple</option>
-                    <option value="trueFalse">Verdadero o falso</option>
-                    <option value="shortAnswer">Respuesta corta</option>
-                  </select>
-                </div>
-
-                <div class="col-md-2 form-group">
-                  <%= f.label :time, "Tiempo en segundos"%><br />
-                  <!--TIME_FIELD-->
-                  <%= f.number_field :time, min: '10', autofocus: true, class: "form-control" ,ng_model:"quiz.time" %>
-                </div>
-
-
-
-                <div class="form-group col-md-12">
-                  <%= f.label :courses, "Asignar a un curso"%><br />
-                  <label>Buscar: <input ng-model="searchTextMyCourses"></label>
-
-                  <select name="repeatCourse" id="repeatCourse" multiple="true" ng_model="question.courses" class="col-md-12 form-control">
-                    <% if @current_user.role == 'admin' %>
-                        <option ng-repeat="course in courses | filter: searchTextMyCourses" value="{{course.id}}">{{course.name}} {{course.code}}</option>
-                    <% elsif @current_user.role == 'teacher' %>
-                        <option ng-repeat="course in courses | filter:{ teacher: '<%= @current_user.id %>'} | filter: searchTextMyCourses" value="{{course.id}}">{{course.name}} {{course.code}}</option>
-                    <% elsif @current_user.role == 'student' %>
-                        <option ng-repeat="course in courses | filter:{ assistant: '<%= @current_user.id %>'} | filter: searchTextMyCourses" value="{{course.id}}">{{course.name}} {{course.code}}</option>
-                    <% end %>
-                  </select>
-                </div>
-
-
-                <div class="form-group col-md-12">
-                  <%= f.label :questions, "Asignar preguntas"%><br />
-                  <label>Buscar: <input ng-model="searchTextMyQuestions"></label>
-
-                  <select name="repeatQuestion" id="repeatQuestion" multiple="true" ng_model="question.courses" class="col-md-12 form-control">
-                    <% if @current_user.role == 'admin' %>
-                        <option ng-repeat="question in questions | filter: searchTextMyQuestions" value="{{question.id}}">{{question.question_asked}}</option>
-                    <% elsif @current_user.role == 'teacher' %>
-                        <option ng-repeat="question in questions  | filter:{ teacher: '<%= @current_user.id %>'} | filter: searchTextMyQuestions" value="{{question.id}}">{{question.question_asked}}</option>
-                    <% elsif @current_user.role == 'student' %>
-                        <option ng-repeat="question in questions  | filter:{ assistant: '<%= @current_user.id %>'} | filter: searchTextMyQuestions" value="{{question.id}}">{{question.question_asked}}</option>
-                    <% end %>
-
-                  </select>
-                </div>
-
-                <div class="col-md-4">
-                  <a class="btn btn-success" ng-click="Add_question()">Crear Pregunta</a>
-                </div>
-            <%end%>
-          </div>
-        </div>
       </div>
+      <div id="main-wrapper">
+        <div class="row">
+
+
+          <div class="col-md-12">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Añadir quiz</h3>
+              </div>
+
+              <div class="panel-body" ng-controller="quizzes">
+                <br>
+
+
+                <%= form_for :quiz,{'onsubmit':"return false;"} do |f| %>
+
+                    <div class="col-md-12 form-group required">
+                      <%= f.label :name, "Nombre del quiz"%><br />
+                      <%= f.text_field :name, autofocus: true, class: "form-control" ,ng_model:"quiz.name" %>
+                    </div>
+
+
+                    <div class="col-md-4 form-group ">
+                      <%= f.label :type, "Tipo de quiz"%><br />
+                      <select name="typeAnswer" id="typeAnswer" ng_model="quiz.type" class="col-md-6 form-control">
+                        <option value="user">Usuario</option>
+                        <option value="annon">Anónimo</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-2 form-group">
+                      <%= f.label :time, "Tiempo en segundos"%><br />
+                      <!--TIME_FIELD-->
+                      <%= f.number_field :time, min: '60', autofocus: true, class: "form-control" ,ng_model:"quiz.time" %>
+                    </div>
+
+                    <div class="col-sm-10 form-group">
+
+                      <%= f.label "Selecciona el curso"%><br />
+
+                      <select id="selectCourse" class="col-md-12 form-control" ng-model="quiz.courses">
+                        <option ng-repeat = "course in courses |  filter: { teacher: '<%= @current_user.id %>'} | filter:{ courses: quiz.courses}" value="{{course.id}}">{{course.name}}</option>
+                      </select>
+
+                      <script type="text/javascript">
+                        $("#selectCourse").select2();
+                      </script>
+                    </div>
+
+
+                    <div class="form-group col-md-12" ng-controller="questions">
+                      <%= f.label :questions, "Asignar preguntas"%><br />
+
+                      <select id="selectQuestionsfromCourse" style="overflow-y: auto;" name="repeatQuestion" ng_model="quiz.questions" multiple="true" class="col-md-12 form-control">
+                        <option ng-repeat = "question in questions | filter:{ courses: quiz.courses} " value="{{question.id}}">{{question.question_asked}}</option>
+                      </select>
+
+                      <script type="text/javascript">
+                        $("#selectQuestionsfromCourse").select2();
+                      </script>
+
+                    </div>
+
+                    <div class="col-md-4">
+                      <a class="btn btn-success" ng-click="Add_quiz()">Crear Quizz</a>
+                    </div>
+                <%end%>
+              </div>
+            </div>
+          </div>
 
 
 
 
 
-    </div><!-- Row -->
-  </div><!-- Main Wrapper -->
-  <div class="page-footer">
-    <p class="no-s">2016 &copy; Clickapp.</p>
-  </div>
-</div><!-- Page Inner -->
+        </div><!-- Row -->
+      </div><!-- Main Wrapper -->
+      <div class="page-footer">
+        <p class="no-s">2016 &copy; Clickapp.</p>
+      </div>
+    </div><!-- Page Inner -->
+<% else %>
+    <script type="text/javascript">
+      window.location.href="/home"
+    </script>
+<% end %>

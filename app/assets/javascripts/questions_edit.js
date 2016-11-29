@@ -13,15 +13,19 @@ app.controller("questions_edit", function($scope,$resource) {
     var id = pathArray[2];
 
     $scope.question = Questions.get({id: id});
-    $scope.question.answers = ["","","",""]
+    $scope.question.answers = ["","","","",""];
 
-    $scope.Update_question= function () {
+    $scope.Edit_question= function () {
 
         question= $scope.question
 
         Questions.update(question,function (data) {
 
+            $scope.question = Questions.get({id: id});
+            $scope.question.answers = ["","","","",""];
         })
+
+window.location.reload();
     }
 
 

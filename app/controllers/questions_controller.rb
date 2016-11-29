@@ -16,19 +16,9 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    question = Question.new(question_params)
-    if params[:type_answer] == 'shortAnswer'
-      question.correct_answer = nil
-      question.answers = []
-    end
-    if params[:type_answer] == 'trueFalse'
-      question.answers = ["true", "false"]
-    end
-
-    question.user = @current_user.id
-    question.save!
-    render json:question
-    redirect_to :new
+    question = Question.find(params[:id])
+    question.update(question_asked: params[:question_asked], answers: params[:answers], points: params[:points], time: params[:time], correct_answer: params[:correct_answer], subject: params[:subject], courses: params[:courses])
+    redirect_to question_path
   end
 
   def destroy
@@ -53,9 +43,11 @@ class QuestionsController < ApplicationController
 
     question.user = @current_user.id
     question.answers.delete("")
-    question.save
 
-    render json:question
+    if question.save?
+      render json:question
+    end
+
   end
 
 
@@ -64,7 +56,6 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit!.to_h
-
   end
 
 

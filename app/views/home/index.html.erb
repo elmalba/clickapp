@@ -94,7 +94,7 @@
                   <!-- 3 REPETITIONS -->
                   <tr ng-repeat = "course in courses | filter: { teacher: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
                     <th scope="row">{{$index+1}}</th>
-                    <td>{{course.name}}</td>
+                    <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
                     <td>{{course.code}}</td>
                     <td>{{course.section}}</td>
                     <td>{{course.teacher}}</td>
@@ -120,7 +120,7 @@
 
                   <tr ng-repeat = "course in courses | filter: { assistant: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
                     <th scope="row">{{$index+1}}</th>
-                    <td>{{course.name}}</td>
+                    <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
                     <td>{{course.code}}</td>
                     <td>{{course.section}}</td>
                     <td>{{course.teacher}}</td>
@@ -146,7 +146,7 @@
                   </tr>
                   <tr ng-repeat = "course in courses | filter: { students: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
                     <th scope="row">{{$index+1}}</th>
-                    <td>{{course.name}}</td>
+                    <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
                     <td>{{course.code}}</td>
                     <td>{{course.section}}</td>
                     <td>{{course.teacher}}</td>

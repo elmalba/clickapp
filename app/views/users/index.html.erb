@@ -1,4 +1,4 @@
-<div class="page-inner" ng-controller="usersadmin">
+<div class="page-inner" ng-controller="users">
   <div class="page-title">
     <h3>Usuarios</h3>
 
@@ -15,6 +15,7 @@
           </div>
           <div class="panel-body">
             <div class="table-responsive project-stats">
+
               <label>Buscar: <input ng-model="searchText"></label>
               <table class="table">
                 <thead>
@@ -42,8 +43,6 @@
                       <ul class="dropdown-menu" role="menu">
                         <% if @current_user.role == 'admin' %>
                             <li><%= link_to "Editar", URI::unescape(edit_user_path(:id => '{{user.id}}')) %></li>
-                            <li class="divider"></li>
-                            <li><a ng-click="Delete_user($index)">Borrar//No funciona</a></li>
                       <% end %>
                       </ul>
                     </div>

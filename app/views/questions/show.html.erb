@@ -58,26 +58,26 @@
 
                     <div style="display:none" id="multform" class="col-md-12 form-group">
 
-                      <%= f.label :answers, "Alternativa 1"%>
+                      <%= f.label :answers, "Alternativa A"%>
                       <%-# radio_button_tag(:correct_answer, '0', ng_model:"question.correct_answer") %>
                       <%-# label_tag(:c_a, "Seleccionar como respuesta correcta") %>
                       <%= f.text_field :answers, autofocus: true, class: "form-control", ng_model:"question.answers[0]" %><br />
 
-                      <%= f.label :answers, "Alternativa 2"%>
+                      <%= f.label :answers, "Alternativa B"%>
                       <%= f.text_field :answers, autofocus: true, class: "form-control", ng_model:"question.answers[1]" %><br />
 
-                      <%= f.label :answers, "Alternativa 3"%>
+                      <%= f.label :answers, "Alternativa C"%>
                       <%= f.text_field :answers, autofocus: true, class: "form-control", ng_model:"question.answers[2]" %><br />
 
-                      <%= f.label :answers, "Alternativa 4"%>
+                      <%= f.label :answers, "Alternativa D"%>
                       <%= f.text_field :answers, autofocus: true, class: "form-control", ng_model:"question.answers[3]" %><br />
 
                       <%= f.label "Selecciona la respuesta correcta"%><br />
                       <select name="mChoice" id="mChoice" ng_model="question.correct_answer" class="col-md-6 form-control">
-                        <option value="0">Alternativa 1</option>
-                        <option value="1">Alternativa 2</option>
-                        <option value="2">Alternativa 3</option>
-                        <option value="3">Alternativa 4</option>
+                        <option value="0">Alternativa A</option>
+                        <option value="1">Alternativa B</option>
+                        <option value="2">Alternativa C</option>
+                        <option value="3">Alternativa D</option>
                       </select>
 
                     </div>

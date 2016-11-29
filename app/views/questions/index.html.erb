@@ -109,70 +109,71 @@
                     <option value="5Choice">5</option>
                   </select>
 
+
                   <script>$(document).ready(updatemChoiceQuantity);
                   $("#mChoiceQuantity").change(updatemChoiceQuantity);</script>
 
 
                   <div style="display:none" id="2ChoiceForm">
 
-                    <%= f.label :A, "Alternativa 1"%>
+                    <%= f.label :A, "Alternativa A"%>
                     <%-# radio_button_tag(:correct_answer, '0', ng_model:"question.correct_answer") %>
                     <%-# label_tag(:c_a, "Seleccionar como respuesta correcta") %>
                     <%= f.text_field :A, autofocus: true, class: "form-control", ng_model:"question.answers[0]" %><br />
 
-                    <%= f.label :B, "Alternativa 2"%>
+                    <%= f.label :B, "Alternativa B"%>
                     <%= f.text_field :B, autofocus: true, class: "form-control", ng_model:"question.answers[1]" %><br />
 
                     <%= f.label "Selecciona la respuesta correcta"%><br />
                     <select name="mChoice" id="mChoice" ng_model="question.correct_answer" class="col-md-6 form-control">
-                      <option value="0">Alternativa 1</option>
-                      <option value="1">Alternativa 2</option>
+                      <option value="0">Alternativa A</option>
+                      <option value="1">Alternativa B</option>
                     </select>
                   </div>
 
                   <div style="display:none" id="3ChoiceForm">
 
-                    <%= f.label :A, "Alternativa 1"%>
+                    <%= f.label :A, "Alternativa A"%>
                     <%-# radio_button_tag(:correct_answer, '0', ng_model:"question.correct_answer") %>
                     <%-# label_tag(:c_a, "Seleccionar como respuesta correcta") %>
                     <%= f.text_field :A, autofocus: true, class: "form-control", ng_model:"question.answers[0]" %><br />
 
-                    <%= f.label :B, "Alternativa 2"%>
+                    <%= f.label :B, "Alternativa B"%>
                     <%= f.text_field :B, autofocus: true, class: "form-control", ng_model:"question.answers[1]" %><br />
 
-                    <%= f.label :C, "Alternativa 3"%>
+                    <%= f.label :C, "Alternativa C"%>
                     <%= f.text_field :C, autofocus: true, class: "form-control", ng_model:"question.answers[2]" %><br />
 
                     <%= f.label "Selecciona la respuesta correcta"%><br />
                     <select name="mChoice" id="mChoice" ng_model="question.correct_answer" class="col-md-6 form-control">
-                      <option value="0">Alternativa 1</option>
-                      <option value="1">Alternativa 2</option>
-                      <option value="2">Alternativa 3</option>
+                      <option value="0">Alternativa A</option>
+                      <option value="1">Alternativa B</option>
+                      <option value="2">Alternativa C</option>
                     </select>
                   </div>
 
                   <div style="display:none" id="4ChoiceForm">
 
-                    <%= f.label :A, "Alternativa 1"%>
+                    <%= f.label :A, "Alternativa A"%>
                     <%-# radio_button_tag(:correct_answer, '0', ng_model:"question.correct_answer") %>
                     <%-# label_tag(:c_a, "Seleccionar como respuesta correcta") %>
                     <%= f.text_field :A, autofocus: true, class: "form-control", ng_model:"question.answers[0]" %><br />
 
-                    <%= f.label :B, "Alternativa 2"%>
+                    <%= f.label :B, "Alternativa B"%>
                     <%= f.text_field :B, autofocus: true, class: "form-control", ng_model:"question.answers[1]" %><br />
 
-                    <%= f.label :C, "Alternativa 3"%>
+                    <%= f.label :C, "Alternativa C"%>
                     <%= f.text_field :C, autofocus: true, class: "form-control", ng_model:"question.answers[2]" %><br />
 
-                    <%= f.label :D, "Alternativa 4"%>
+                    <%= f.label :D, "Alternativa D"%>
                     <%= f.text_field :D, autofocus: true, class: "form-control", ng_model:"question.answers[3]" %><br />
 
                     <%= f.label "Selecciona la respuesta correcta"%><br />
                     <select name="mChoice" id="mChoice" ng_model="question.correct_answer" class="col-md-6 form-control">
-                      <option value="0">Alternativa 1</option>
-                      <option value="1">Alternativa 2</option>
-                      <option value="2">Alternativa 3</option>
-                      <option value="3">Alternativa 4</option>
+                      <option value="0">Alternativa A</option>
+                      <option value="1">Alternativa B</option>
+                      <option value="2">Alternativa C</option>
+                      <option value="3">Alternativa D</option>
                     </select>
 
 
@@ -181,30 +182,30 @@
 
                   <div style="display:none" id="5ChoiceForm">
 
-                    <%= f.label :A, "Alternativa 1"%>
+                    <%= f.label :A, "Alternativa A"%>
                     <%-# radio_button_tag(:correct_answer, '0', ng_model:"question.correct_answer") %>
                     <%-# label_tag(:c_a, "Seleccionar como respuesta correcta") %>
                     <%= f.text_field :A, autofocus: true, class: "form-control", ng_model:"question.answers[0]" %><br />
 
-                    <%= f.label :B, "Alternativa 2"%>
+                    <%= f.label :B, "Alternativa B"%>
                     <%= f.text_field :B, autofocus: true, class: "form-control", ng_model:"question.answers[1]" %><br />
 
-                    <%= f.label :C, "Alternativa 3"%>
+                    <%= f.label :C, "Alternativa C"%>
                     <%= f.text_field :C, autofocus: true, class: "form-control", ng_model:"question.answers[2]" %><br />
 
-                    <%= f.label :D, "Alternativa 4"%>
+                    <%= f.label :D, "Alternativa D"%>
                     <%= f.text_field :D, autofocus: true, class: "form-control", ng_model:"question.answers[3]" %><br />
 
-                    <%= f.label :E, "Alternativa 5"%>
+                    <%= f.label :E, "Alternativa E"%>
                     <%= f.text_field :E, autofocus: true, class: "form-control", ng_model:"question.answers[4]" %><br />
 
                     <%= f.label "Selecciona la respuesta correcta"%><br />
                     <select name="mChoice" id="mChoice" ng_model="question.correct_answer" class="col-md-6 form-control">
-                      <option value="0">Alternativa 1</option>
-                      <option value="1">Alternativa 2</option>
-                      <option value="2">Alternativa 3</option>
-                      <option value="3">Alternativa 4</option>
-                      <option value="4">Alternativa 5</option>
+                      <option value="0">Alternativa A</option>
+                      <option value="1">Alternativa B</option>
+                      <option value="2">Alternativa C</option>
+                      <option value="3">Alternativa D</option>
+                      <option value="4">Alternativa E</option>
                     </select>
                   </div>
 
@@ -229,9 +230,9 @@
 
                 <div class="form-group col-md-12">
                   <%= f.label :course, "Asignar a un curso"%><br />
-                  <label>Buscar: <input ng-model="searchTextMyCourses"></label>
 
-                  <select name="repeatSelect" id="repeatSelect" multiple="true" ng_model="question.courses" class="col-md-12 form-control">
+
+                  <select id="selectCourses" name="repeatSelect" allow-clear="true" id="repeatSelect" multiple="true" ng_model="question.courses" class="col-md-12 form-control">
                     <% if @current_user.role == 'admin' %>
                         <option ng-repeat="course in courses | filter: searchTextMyCourses" value="{{course.id}}">{{course.name}} {{course.code}}</option>
                     <% elsif @current_user.role == 'teacher' %>
@@ -239,8 +240,14 @@
                     <% elsif @current_user.role == 'student' %>
                         <option ng-repeat="course in courses | filter:{ assistant: '<%= @current_user.id %>'} | filter: searchTextMyCourses" value="{{course.id}}">{{course.name}} {{course.code}}</option>
                     <% end %>
-
                   </select>
+
+                  <script type="text/javascript">
+                       $("#selectCourses").select2({
+                      placeholder: "Selecciona un curso",
+                      allowClear: true
+                    });
+                  </script>
                 </div>
 
                 <div class="col-md-4">
@@ -250,6 +257,7 @@
           </div>
         </div>
       </div>
+
 
       <!--questions listed -->
 
@@ -297,7 +305,7 @@
                       Acción <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a ng-click="Delete_question($index)">Borrar</a></li>
+                      <li><a ng-click="Delete_question(question)">Borrar</a></li>
                       <li><%= link_to "Editar", URI::unescape(edit_question_path(:id => '{{question.id}}')) %></li>
                       <li><a ng-click= "open_window(question.id)" >Ver Gráfico </a>  </li>
                     </ul>
