@@ -30,11 +30,6 @@
                 <p> Ayudante NN </p>
             <% end %>
 
-            <% if @current_user.role == 'admin' or @course.teacher == @current_user.id or @course.assistant == @current_user.id %>
-                <%= link_to "Crear un Quiz", {:controller => "quizzes", :action => "new"}, class: "btn btn-success" %>
-
-
-            <% end %>
           </div>
         </div>
       </div>
@@ -66,7 +61,7 @@
                   </div>
                   <td><%= user.rut%></td>
                   <td><%= user.name%></td>
-                  <td><%= user.rut%></td>
+                  <td><%= user.lastname%></td>
                   <td><%= user.email%></td>
 
                   <td>
@@ -131,7 +126,6 @@
                                 <li><%= link_to "Borrar alumno", {:controller => "courses", :action => "deleteStudent", :id => @course.id, :user => user.id }%></li>
 
                           <% end %>
-                            <li><a>Enviar correo</a></li>
 
 
                           </ul>
@@ -172,7 +166,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat = "quiz in quizzes | filter: searchTextMyQuizzes">
+                    <tr ng-repeat = "quiz in quizzes | filter:{ courses: '<%= @course.id %>'} | filter: searchTextMyQuizzes">
 
                       <th scope="row">{{$index+1}}</th>
                       <td>{{quiz.name}}</td>

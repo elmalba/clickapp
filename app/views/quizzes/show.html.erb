@@ -1,0 +1,79 @@
+  <!-- if user in students or teacher or assistant or admin -->
+  <div class="page-inner">
+      <div class="page-title">
+        <h3><%= @quiz.name %></h3>
+
+      </div>
+      <div id="main-wrapper" ng-controller="quizzes">
+        <div class="row">
+
+
+          <div class="col-md-12">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title"><%= @quiz.name %></h3>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-12 col-md-12">
+            <div class="panel panel-white">
+              <div class="panel-heading">
+                <h4 class="panel-title">Respuestas de los alumnos//ARREGLAR</h4>
+              </div>
+              <div class="panel-body">
+                <div class="table-responsive project-stats">
+                  <label>Buscar: <input ng-model="searchTextQuizzes"></label>
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Nombre</th>
+                      <th>Tipo</th>
+                      <th>Curso</th>
+                      <th>Acción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat = "quiz in quizzes | filter:{ user: '<% @current_user.id %>'} | filter:searchTextQuizzes">
+                      <th scope="row">{{$index+1}}</th>
+                      <td>{{quiz.name}}</td>
+                      <td>{{quiz.type}}</td>
+                      <td>{{quiz.courses}}</td>
+
+                      <td>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            Acción <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <% if @current_user.role == 'admin' %>
+                                <li><%= link_to "Ver Quiz", URI::unescape(quiz_path(:id => '{{quiz.id}}')) %></li>
+                                <li><%= link_to "Editar", URI::unescape(edit_quiz_path(:id => '{{quiz.id}}')) %></li>
+                                <li class="divider"></li>
+                                <li><a href="#" ng-click="Delete_quiz(quiz)">Borrar</a></li>
+                            <% end %>
+
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+        </div><!-- Row -->
+      </div><!-- Main Wrapper -->
+      <div class="page-footer">
+        <p class="no-s">2016 &copy; Clickapp.</p>
+      </div>
+    </div><!-- Page Inner -->

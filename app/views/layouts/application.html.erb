@@ -194,8 +194,6 @@
                   <ul class="menu accordion-menu">
                     <li><%= link_to root_path, class: "waves-effect waves-button" do %><span class="menu-icon glyphicon glyphicon-home"></span><p>Inicio</p><% end %></li>
                     <li><%= link_to user_path(:id => @current_user.id), class: "waves-effect waves-button" do %><span class="menu-icon glyphicon glyphicon-user"></span><p>Perfil</p><% end %></li>
-                    <li><%= link_to root_path, class: "waves-effect waves-button" do %><span class="menu-icon glyphicon glyphicon-stats"></span><p>Estadísticas</p><% end %></li>
-
                     <% if @current_user.role == 'admin' %>
                         <li><%= link_to users_path, class: "waves-effect waves-button" do %><span class="menu-icon glyphicon glyphicon-pencil"></span><p>Usuarios</p><% end %></li>
                     <% end %>
@@ -205,6 +203,7 @@
 
                     <li><%= link_to courses_path, class: "waves-effect waves-button" do %><span class="menu-icon glyphicon glyphicon-book"></span><p>Cursos</p><% end %></li>
                     <li><%= link_to questions_path, class: "waves-effect waves-button" do %><span class="menu-icon glyphicon glyphicon-question-sign"></span><p>Preguntas</p><% end %></li>
+                    <li><%= link_to quizzes_path, class: "waves-effect waves-button" do %><span class="menu-icon glyphicon glyphicon-check"></span><p>Quizzes</p><% end %></li>
                     <li><%= link_to logout_path, class: "waves-effect waves-button" do %><span class="menu-icon glyphicon glyphicon-log-out"></span><p>Log out</p><% end %></li>
 
 

@@ -9,7 +9,8 @@ class Quiz
   field :questions, :type => Array, :default => []
   field :students, :type => Array, :default => []
   field :mode , :type =>String
+  field :user,  :type =>String #Creador (docente)
 
-  #tabla notas
+  #tabla notas?
 
 end
