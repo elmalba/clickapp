@@ -3,16 +3,8 @@ class UsersController < ApplicationController
   skip_before_action :login_required, :only => [:new, :create]
 
   def index
-    if @current_user.role == 'admin'
-       if request.format.json?
-        return render json:User.pluck(:id, :name, :lastname, :role, :rut, :email).all()
-       end
-    elsif @current_user.role == 'teacher'
-      if request.format.json?
-        return render json:User.where(:role => 'student').pluck(:id, :name, :lastname, :role, :rut, :email).all()
-      end
-    else
-      redirect_to root_path
+    if request.format.json?
+      return render json:User.pluck(:id, :name, :lastname, :role, :rut, :email).all()
     end
   end
 

@@ -4,7 +4,7 @@
       <h3>Inicio</h3>
     </div>
     <div id="main-wrapper">
-      <div class="row">
+      <div class="row" ng-controller="users">
         <!-- Row -->
     <% if @current_user.role == 'admin' %>
         <div class="col-lg-3 col-md-6">
@@ -85,7 +85,6 @@
                     <th>Código</th>
                     <th>Sección</th>
                     <th>Docente</th>
-                    <th>Ayudante</th>
                     <th>Acción</th>
                   </tr>
                   </thead>
@@ -97,8 +96,7 @@
                     <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
                     <td>{{course.code}}</td>
                     <td>{{course.section}}</td>
-                    <td>{{course.teacher}}</td>
-                    <td>{{course.assistant}}</td>
+                    <td ng-repeat="user in users | filter : {id: course.teacher}">{{user.name}} {{user.lastname}}</td>
                     <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -123,8 +121,7 @@
                     <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
                     <td>{{course.code}}</td>
                     <td>{{course.section}}</td>
-                    <td>{{course.teacher}}</td>
-                    <td>{{course.assistant}}</td>
+                    <td ng-repeat="user in users | filter : {id: course.teacher}">{{user.name}} {{user.lastname}}</td>
                     <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -149,8 +146,7 @@
                     <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
                     <td>{{course.code}}</td>
                     <td>{{course.section}}</td>
-                    <td>{{course.teacher}}</td>
-                    <td>{{course.assistant}}</td>
+                    <td ng-repeat="user in users | filter : {id: course.teacher}">{{user.name}} {{user.lastname}}</td>
                     <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

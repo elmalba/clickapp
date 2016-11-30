@@ -21,13 +21,5 @@ app.controller("users", function($scope,$resource) {
         Users.delete(user);
     };
 
-    $scope.Name_user = function(id) {
-        var index = $scope.users.indexOf(item);
-
-        user=$scope.users[index];
-        user.data('name');
-        console.log()
-    };
-
 
 });

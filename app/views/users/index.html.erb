@@ -32,7 +32,7 @@
                 <tr ng-repeat = "user in users | filter:searchText">
                   <th scope="row">{{$index+1}}</th>
                   <td>{{user.rut}}</td>
-                  <td>{{user.name}}</td>
+                  <td>{{user.name}} {{user.lastname}}</td>
                   <td>{{user.email}}</td>
                   <td>{{user.role}}</td>
                   <td>

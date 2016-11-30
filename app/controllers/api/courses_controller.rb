@@ -1,7 +1,13 @@
 class Api::CoursesController < Api::ApiController
 
   def index
-    course=Course.find("44oGwcH67QYaIU")
+
+
+    courses=Course.where(:students.include => params[:id]).all()
+
+    data=[]
+
+    courses.each { |course|
 
     objeto={"_id":course.id,
             "description":course.code,
@@ -41,7 +47,9 @@ class Api::CoursesController < Api::ApiController
 
     }
 
-    data=[objeto]
+      data.push(objeto);
+
+    }
 
     pagination={"page":1,"per_page":20,"total_pages":1,"total_elements":3}
 

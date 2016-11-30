@@ -2,9 +2,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :courses
-  end
-  namespace :api do
     resources :questions
+    resources :login
   end
   namespace :ppt do
     resources :live

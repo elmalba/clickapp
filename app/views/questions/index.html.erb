@@ -271,7 +271,7 @@
             <% end %>
           </div>
 
-          <div class="panel-body">
+          <div class="panel-body" ng-controller="users">
             <label>Buscar: <input ng-model="searchTextQuestions"></label>
             <div class="table-responsive project-stats">
               <table class="table">
@@ -298,16 +298,17 @@
                 <td>{{question.subject}}</td>
                 <td>{{question.courses}}</td>
                 <td>{{question.type_answer}}</td>
-                <td>{{question.user}}</td><!-- MOSTRAR NOMBRE DE USUARIO-->
+                <td ng-repeat="user in users | filter : {id: question.user}">{{user.name}} {{user.lastname}}</td>
                 <td>
                   <div class="btn-group">
                     <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                       Acción <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a ng-click="Delete_question(question)">Borrar</a></li>
                       <li><%= link_to "Editar", URI::unescape(edit_question_path(:id => '{{question.id}}')) %></li>
-                      <li><a ng-click= "open_window(question.id)" >Ver Gráfico </a>  </li>
+                      <li><a ng-click= "open_window(question.id)" >Ver en Gráfico </a>  </li>
+                      <li><a ng-click="Delete_question(question)">Borrar</a></li>
+
                     </ul>
                   </div>
                 </td>

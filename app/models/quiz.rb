@@ -12,5 +12,8 @@ class Quiz
   field :user,  :type =>String #Creador (docente)
 
   #tabla notas?
+  def users_students
+    User.where(:id.in students)
+  end
 
 end

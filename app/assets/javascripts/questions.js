@@ -40,7 +40,6 @@ app.controller("questions", function($scope,$resource) {
         Questions.delete(question);
     };
 
-
     //$scope.Delete_question = function (index) {
 
         //question=$scope.questions[index];

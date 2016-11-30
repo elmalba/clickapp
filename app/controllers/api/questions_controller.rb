@@ -63,13 +63,26 @@ class Api::QuestionsController <Api::ApiController
     p "aca"
     p params
     question=Question.where(:status=>"Disponible").first()
+
+    last_answer = Answer.where(:question => question.id ,:user=> params[:id_user] ).first()
+
+    if last_answer
+
+
+      return render json:{'option':"No Valido"}
+    else
+
+
+
     answer=Answer.new()
     answer.answer=params[:respuesta]
     answer.question=question.id
-    p "HOLA"
+    answer.user=params[:id_user]
     answer.save()
 
-    render plain:answer
+    return render json:answer
+
+    end
 
   end
 

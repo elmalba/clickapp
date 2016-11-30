@@ -7,8 +7,6 @@ app.controller("quizzes", function($scope,$resource) {
 
     });
 
-
-
     $scope.quizzes=Quizzes.query();
 
     $scope.quiz = new Quizzes();
@@ -36,6 +34,7 @@ app.controller("quizzes", function($scope,$resource) {
 
         Quizzes.delete(quiz);
     };
+
 
 
 });

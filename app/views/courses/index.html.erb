@@ -5,7 +5,7 @@
 
   </div>
   <div id="main-wrapper">
-    <div class="row">
+    <div class="row" ng-controller="users">
 
 
       <% if @current_user.role == 'admin' or @current_user.role == 'teacher' %>
@@ -19,7 +19,7 @@
                   <!--<a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Reload" class="panel-reload"><i class="icon-reload"></i></a>-->
                 </div>
               </div>
-              <div class="panel-body collapse" ng-controller="users">
+              <div class="panel-body collapse">
                 <br>
                 <%= form_for :course,{'onsubmit':"return false;"} do |f| %>
 
@@ -99,7 +99,6 @@
                   <th>Código</th>
                   <th>Sección</th>
                   <th>Docente</th>
-                  <th>Ayudante</th>
                   <th>Acción</th>
                 </tr>
                 </thead>
@@ -111,8 +110,7 @@
                   <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
                   <td>{{course.code}}</td>
                   <td>{{course.section}}</td>
-                  <td>{{course.teacher}}</td>
-                  <td>{{course.assistant}}</td>
+                  <td ng-repeat="user in users | filter : {id: course.teacher}">{{user.name}} {{user.lastname}}</td>
                   <td>
                     <div class="btn-group">
                       <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -137,11 +135,9 @@
                 <tr ng-repeat = "course in courses | filter: { assistant: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
                   <th scope="row">{{$index+1}}</th>
                   <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
-                  <td>{{course.code}}-{{course.section}}</td>
+                  <td>{{course.code}}</td>
                   <td>{{course.section}}</td>
-                  <td>{{course.teacher}}</td>
-                  <td>{{course.assistant}}</td>
-                  <td>
+                  <td>{{course.teacher}}</td><td>
                     <div class="btn-group">
                       <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         Acción <span class="caret"></span>
@@ -166,8 +162,7 @@
                   <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
                   <td>{{course.code}}</td>
                   <td>{{course.section}}</td>
-                  <td>{{course.teacher}}</td>
-                  <td>{{course.assistant}}</td>
+                  <td ng-repeat="user in users | filter : {id: course.teacher}">{{user.name}} {{user.lastname}}</td>
                   <td>
                     <div class="btn-group">
                       <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -212,7 +207,6 @@
                   <th>Código</th>
                   <th>Sección</th>
                   <th>Docente</th>
-                  <th>Ayudante</th>
                   <th>Acción</th>
                 </tr>
                 </thead>
@@ -222,8 +216,7 @@
                   <td>{{course.name}}</td>
                   <td>{{course.code}}</td>
                   <td>{{course.section}}</td>
-                  <td>{{course.teacher}}</td>
-                  <td>{{course.assistant}}</td>
+                  <td ng-repeat="user in users | filter : {id: course.teacher}">{{user.name}} {{user.lastname}}</td>
                   <td>
                     <div class="btn-group">
                       <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
