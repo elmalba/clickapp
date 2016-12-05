@@ -31,20 +31,34 @@
                       <th>Nombre</th>
                       <th>Apellido</th>
                       <th>Email</th>
-                      <th>Nota</th>
+                      <th>Correctas</th>
+                      <th>Total</th>
+                      <th>Nota Final</th>
                     </tr>
                     </thead>
                     <tbody>
                     <% @quiz.users_students.each do |user| %>
                         <tr>
+                          <% score = 0 %>
+                          <% total = 0 %>
                           <td><%= user.rut%></td>
                           <td><%= user.name%></td>
                           <td><%= user.lastname %></td>
                           <td><%= user.email%></td>
-                          <td>:)</td>
-                          <td>
-                          </td>
-                        </tr>
+                          <!-- Obtiene las preguntas y las respuestas -->
+                          <% Answer.where(:user => user.id).each do |answer|%>
+                                <% Question.where(:id => answer.question).each do |question|%>
+                                  <% if question.correct_answer == answer.answer%>
+                                      <% score += 1 %>
+                                  <% end %>
+                                    <% total += 1 %>
+                                <% end %>
+                              <% end %>
+                          <!-- CALCULO DE LA NOTA -->
+                           <td><%= score %></td>
+                           <td><%= total %></td>
+                           <td><%= 1+(score*6.0/total) %></td>
+                          </tr>
                     <% end %>
 
                     </tbody>

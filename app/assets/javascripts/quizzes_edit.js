@@ -1,7 +1,7 @@
 app.controller("quizzes_edit", function($scope,$resource) {
 
 
-    Quizzes = $resource('/quizzes/:id', {id:'@id'},{
+    Quizzes = $resource('/quizzes/:id.json', {id:'@id'},{
         query: {method:'get', isArray: true ,headers: { 'Accept': 'application/json' } }
         , 'update': { method:'PUT' }
 
@@ -13,7 +13,6 @@ app.controller("quizzes_edit", function($scope,$resource) {
     var id = pathArray[2];
 
     $scope.quiz = Quizzes.get({id: id});
-    $scope.quiz.courses = [""];
 
     $scope.Edit_quiz= function () {
 
@@ -22,10 +21,9 @@ app.controller("quizzes_edit", function($scope,$resource) {
         Quizzes.update(quiz,function (data) {
 
             $scope.quiz = Quizzes.get({id: id});
-            $scope.quiz.courses = [""];
         })
 
-//window.location.reload();
+        window.location.reload();
     }
 
 

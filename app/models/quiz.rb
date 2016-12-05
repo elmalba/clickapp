@@ -11,7 +11,6 @@ class Quiz
   field :mode , :type =>String
   field :user,  :type =>String #Creador (docente)
 
-  #tabla notas?
   def users_students
     User.where(:id.in students)
   end

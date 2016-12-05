@@ -107,7 +107,7 @@
                 <!-- 3 REPETITIONS -->
                 <tr ng-repeat = "course in courses | filter: { teacher: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
                   <th scope="row">{{$index+1}}</th>
-                  <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
+                  <td><a href="" ng-click="open_window_course(course.id)">{{course.name}}</a></td>
                   <td>{{course.code}}</td>
                   <td>{{course.section}}</td>
                   <td ng-repeat="user in users | filter : {id: course.teacher}">{{user.name}} {{user.lastname}}</td>
@@ -134,7 +134,7 @@
 
                 <tr ng-repeat = "course in courses | filter: { assistant: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
                   <th scope="row">{{$index+1}}</th>
-                  <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
+                  <td><a href="" ng-click="open_window_course(course.id)">{{course.name}}</a></td>
                   <td>{{course.code}}</td>
                   <td>{{course.section}}</td>
                   <td>{{course.teacher}}</td><td>
@@ -159,7 +159,7 @@
 
                 <tr ng-repeat = "course in courses | filter: { students: '<%= @current_user.id %>'} | filter: searchTextMyCourses">
                   <th scope="row">{{$index+1}}</th>
-                  <td><a href="" ng-click="open_window(course.id)">{{course.name}}</a></td>
+                  <td><a href="" ng-click="open_window_course(course.id)">{{course.name}}</a></td>
                   <td>{{course.code}}</td>
                   <td>{{course.section}}</td>
                   <td ng-repeat="user in users | filter : {id: course.teacher}">{{user.name}} {{user.lastname}}</td>

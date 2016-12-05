@@ -2,13 +2,10 @@ class QuizzesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def show
-    if request.format.json?
-      return render json:Quiz.find(params[:id])
-    else
-      @quiz = Quiz.find(params[:id])
+    respond_to do |format|
+      format.html {  @quiz = Quiz.find(params[:id]) }
+      format.json { render json:Quiz.find(params[:id])}
     end
-
-
   end
 
   def new

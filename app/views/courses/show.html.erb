@@ -6,7 +6,7 @@
     <h3><%= @course.name %> | <%= @course.code %></h3>
   </div>
   <div id="main-wrapper">
-    <div class="row">
+    <div class="row" ng-controller="users">
       <!-- Row -->
 
       <div class="col-lg-12 col-md-12">
@@ -224,7 +224,7 @@
                 <td>{{question.question_asked}}</td>
                 <td>{{question.subject}}</td>
                 <td>{{question.type_answer}}</td>
-                <td>{{question.user}}</td>
+                  <td ng-repeat="user in users | filter : {id: question.user}">{{user.name}} {{user.lastname}}</td>
                 <td>
                   <div class="btn-group">
                     <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

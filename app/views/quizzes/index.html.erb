@@ -5,7 +5,7 @@
       </div>
       <% if @current_user.role == 'admin' or @current_user.role == 'teacher' %>
       <div id="main-wrapper" ng-controller="quizzes">
-        <div class="row">
+        <div class="row" ng-controller="courses">
 
 
           <div class="col-md-12">
@@ -14,7 +14,7 @@
                 <h3 class="panel-title">Añadir quiz</h3>
               </div>
 
-              <div class="panel-body" ng-controller="courses" >
+              <div class="panel-body">
                 <br>
 
 
@@ -45,7 +45,7 @@
                       <%= f.label "Selecciona el curso"%><br />
 
                       <% if @current_user.role == 'admin'%>
-                          <select id="selectCourseAdmin" style="overflow-y: auto;" class="col-md-12 form-control" ng_model="quiz.courses[0]">
+                          <select id="selectCourseAdmin" style="overflow-y: auto;"  multiple="true" class="col-md-12 form-control" ng_model="quiz.courses">
                             <option ng-repeat = "course in courses " value="{{course.id}}">{{course.name}}</option>
                           </select>
 
@@ -54,7 +54,7 @@
                             $("#selectCourseAdmin").select2();
                           </script>
                       <% else %>
-                          <select id="selectCourse" style="overflow-y: auto;" class="col-md-12 form-control" ng_model="quiz.courses[0]">
+                          <select id="selectCourse" style="overflow-y: auto;" multiple="true" class="col-md-12 form-control" ng_model="quiz.courses">
                             <option ng-repeat = "course in courses |  filter: { teacher: '<%= @current_user.id %>'}" value="{{course.id}}">{{course.name}}</option>
                           </select>
 
@@ -72,7 +72,10 @@
                       <%= f.label :questions, "Asignar preguntas"%><br />
 
                       <select id="selectQuestionsfromCourse" style="overflow-y: auto;" name="repeatQuestion" ng_model="quiz.questions" multiple="true" class="col-md-12 form-control">
-                        <option ng-repeat = "question in questions | filter:{ courses: quiz.courses[0]} " value="{{question.id}}">{{question.question_asked}}</option>
+                        <% (0..10).each do |i| %> <!--lista 2 veces la pregunta -->
+                        <option ng-if="quiz.courses['<%= i %>']" ng-repeat="question in questions | filter : {courses: quiz.courses['<%= i %>']}" value="{{question.id}}" >{{question.question_asked}}</option>
+                        <% end %>
+
                       </select>
 
                       <script type="text/javascript">
@@ -82,7 +85,7 @@
                     </div>
 
                     <div class="col-md-4">
-                      <a class="btn btn-success" ng-click="Add_quiz()">Crear Quizz</a>
+                      <a class="btn btn-success" ng-click="Add_quiz()">Crear Quiz</a>
                     </div>
                 <%end%>
               </div>
@@ -129,9 +132,16 @@
                       <th scope="row">{{$index+1}}</th>
                       <td>{{quiz.name}}</td>
                       <td>{{quiz.type}}</td>
-                      <td>{{quiz.courses}}</td>
+                      <td>
+                        <% (0..10).each do |i| %>
+                            <div ng-if="quiz.courses['<%= i %>']">
+                              <div ng-repeat="course in courses | filter : {id: quiz.courses['<%= i %>']}">{{course.name}} {{course.code}}</div>
+                            </div>
+                        <% end %>
+                      </td>
 
                       <td>
+
                         <div class="btn-group">
                           <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             Acción <span class="caret"></span>

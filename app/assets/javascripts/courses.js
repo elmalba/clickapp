@@ -43,7 +43,7 @@ app.controller("courses", function($scope,$resource) {
       Request.save(course)
     };
 
-    $scope.open_window = function (url) {
+    $scope.open_window_course = function (url) {
 
         window.open("/courses/"+url,"_self")
 

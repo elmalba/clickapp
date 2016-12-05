@@ -47,11 +47,11 @@
     <h3>Preguntas</h3>
 
   </div>
-  <div id="main-wrapper">
+  <div id="main-wrapper" ng-controller="courses">
     <div class="row">
 
 
-      <div class="col-md-12" ng-controller="courses">
+      <div class="col-md-12">
         <div class="panel panel-success">
           <div class="panel-heading">
             <h3 class="panel-title">Añadir pregunta</h3>
@@ -296,7 +296,15 @@
                 <th scope="row">{{$index+1}}</th>
                 <td>{{question.question_asked}}</td>
                 <td>{{question.subject}}</td>
-                <td>{{question.courses}}</td>
+                <td><!-- MUESTRA HASTA 10 CURSOS -->
+
+                  <% (0..10).each do |i| %>
+                      <div ng-if="question.courses['<%= i %>']">
+                        <div ng-repeat="course in courses | filter : {id: question.courses['<%= i %>']}">{{course.name}} {{course.code}}</div>
+                      </div>
+                  <% end %>
+
+                </td>
                 <td>{{question.type_answer}}</td>
                 <td ng-repeat="user in users | filter : {id: question.user}">{{user.name}} {{user.lastname}}</td>
                 <td>

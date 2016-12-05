@@ -10,7 +10,6 @@ app.controller("quizzes", function($scope,$resource) {
     $scope.quizzes=Quizzes.query();
 
     $scope.quiz = new Quizzes();
-    $scope.quiz.courses = [""]
 
     $scope.Add_quiz= function () {
 
@@ -20,7 +19,6 @@ app.controller("quizzes", function($scope,$resource) {
 
             $scope.quizzes.push(data);
             $scope.quiz = new Quizzes();
-            $scope.quiz.courses = [""]
         })
         window.location.reload();
     }
